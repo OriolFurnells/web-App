@@ -1,0 +1,67 @@
+body {
+	padding-top: 2em;
+	padding-right: 2em;
+	padding-left: 2em;
+}
+
+header {
+	padding-bottom: 3em;
+	display: flex;
+	justify-content: space-between;
+}
+
+header img{
+	align-self: center;
+}
+
+.logoL {
+	width: 20%;
+}
+
+.logoC {
+	width: 40%;
+}
+
+
+.options {
+	width: 100%;
+	text-align: center;
+	height: 3em;
+	margin-bottom: 1em;
+}
+
+.button {
+	
+	padding:1em;
+	justify-content: center;
+	align-items:center;
+	height:4em;
+	background: grey ;
+	border-radius: 100%;
+	margin: 1em;
+	display: flex;
+}
+
+
+.center{
+	text-align:  center;
+	justify-content: center;
+	display: flex;
+	display:block;
+}
+
+.map{
+	height: 20em;
+	margin-top:1em;
+}
+
+.back{
+	margin-bottom: 1em;
+	align-content: center;
+}
+/*
+
+.date{
+	padding:-5px;
+}
+*/

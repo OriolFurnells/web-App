@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<!-- necesario??-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+	<!-- icono de escritorio-->
+	<link rel="apple-touch-icon" href="images/helmet.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="images/helmet&ball.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="images/helmet&ball.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="images/helmet&ball.png">
+	<!--pagina de carga previa -->
+	<link rel="apple-touch-startup-image" href="https://3wga6448744j404mpt11pbx4-wpengine.netdna-ssl.com/startup-image.png">
+	<!-- meta para cambiar el titulo de la pagina	-->
+	<meta name="apple-mobile-web-app-title" content="Fefa">
+	<!-- metas para ocultar barra de navegación de navegadores-->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- pone fondo de la parte superior del movil (bateria, hora,...) del mismo color que el fondo-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<!-- METAS ANDROID -->
+	<!--icono de escritorio -->
+	<link rel="shortcut icon" sizes="196x196" href="images/helmetBall.png">
+	<meta name="mobile-web-app-capable" content="yes">
+	<!--¿bootstrap?-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<title>FEFA</title>
+</head>
+
+<body>
+	<div id="app" class="body">
+		<header>
+			<!--logo equipo (si seleccionado)-->
+
+			<!-- 
+			<div  v-for="id in teams">
+			<p v-if="id=={{id.id}}">
+-->
+			<img class="logoL" src="images/nysl_logo.png">
+			<!--				</p></div> -->
+
+			<!--logo liga con hipervinculo al inicio-->
+			<img v-on:click="selectedWindow" data-option="menu" class="logoC" src="images/fefa2.png">
+			<!--log ing/log out-->
+			<img class="logoL" src="images/nysl_logo.png">
+		</header>
+
+		<!--v-show=teamRullete se muestra en menu, y matches-->
+		
+		<div  v-show="teamMenu">
+		<!--cambiar -->
+			<select class="options" id="team" @click="selectedInformation">
+				<option> </option>
+				<option v-for="team in teams">
+					{{team.name}}
+				</option>
+			</select>
+		</div>
+
+		<!-- PAGINA PRINCIPAL -->
+
+		<div v-show="menu" class="center">
+			<div v-on:click="selectedWindow" data-option="matches" id="election"  class="button">Partidos
+			</div>
+
+			<div v-on:click="selectedWindow" data-option="LocationList" id="locationsList"  class="button">Localizaciones
+			</div>
+
+			<div v-on:click="selectedWindow" data-option="chat" id="chat"  class="button"><div>Chat</div>
+			</div>
+		</div>
+		
+		<!-- cambio de bloque-->
+		<!--PAGINA DE MATCHES-->
+		<div v-show="matchesV" > 
+		<div class="options" @change="selectedInformation">
+			<div>
+				<select id="date" class="date">
+					<option>Escoge una jornada </option>
+					<option v-for="date in matches ">
+						<span class="date">Semana {{date.week}} </span>
+					</option>
+				</select>
+				<div> se tiene que mostrar la info de dia y hora junto con el nombre del estadio y/o dirección</div>
+			</div>
+		</div>
+
+		</div>
+		<!--------------si escoges equipo y semana,  SE MOSTRARA EL MAPA 
+		<div>
+			<p class="map"><iframe :src=urlSelected width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+		</div>
+-->
+		<!--------------filtras fecha, escoges equipo
+		<div>
+			se muestran los 2 partidos de la semana en lista
+		</div>
+-->
+		<!--------------filtras equipo, escoges fecha 
+		<div>
+			listado de las 6 semanas con ruta
+
+		</div>
+		-->
+		<!--------------si no filtras nada, listado de fines de semana
+		<div>tienes que elegir equipo y/o fecha
+			listado de las 6 semanas con toda la info
+		
+		</div>
+-->
+		
+			<!-- cambio de bloque-->
+		
+		<!-- PAGINA LISTADO MAPAS -->
+		<div v-show="locationsList" >
+			<h3>Ubicaciones</h3>
+			<ul>
+				<li v-for="team in teams"> {{team.stadium}}</li>
+			</ul>
+		</div>
+
+		<!-- PAGINA MAPA CONCRETO DESDE LISTADO MAPAS 
+		<div id="locationMap" class="center">
+			<h3>{{selectedName}}</h3>
+			<p> {{selectedAddress}}</p>
+			<p class="map"><iframe :src=urlSelected width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+			<div class="back">
+				<input type="button" value="Volver">
+			</div>
+
+		</div>
+-->
+
+
+
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
+			authDomain: "app-fefa.firebaseapp.com",
+			databaseURL: "https://app-fefa.firebaseio.com",
+			projectId: "app-fefa",
+			storageBucket: "app-fefa.appspot.com",
+			messagingSenderId: "837454779753"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>
