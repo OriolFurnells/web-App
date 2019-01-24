@@ -2,159 +2,196 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<!-- necesario??-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
-	<!-- icono de escritorio-->
-	<link rel="apple-touch-icon" href="images/helmet.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="images/helmet&ball.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="images/helmet&ball.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="images/helmet&ball.png">
-	<!--pagina de carga previa -->
-	<link rel="apple-touch-startup-image" href="https://3wga6448744j404mpt11pbx4-wpengine.netdna-ssl.com/startup-image.png">
-	<!-- meta para cambiar el titulo de la pagina	-->
-	<meta name="apple-mobile-web-app-title" content="Fefa">
-	<!-- metas para ocultar barra de navegación de navegadores-->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<!-- pone fondo de la parte superior del movil (bateria, hora,...) del mismo color que el fondo-->
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<!-- METAS ANDROID -->
-	<!--icono de escritorio -->
-	<link rel="shortcut icon" sizes="196x196" href="images/helmetBall.png">
-	<meta name="mobile-web-app-capable" content="yes">
-	<!--¿bootstrap?-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css">
-	<title>FEFA</title>
+    <meta charset="utf-8">
+    <!-- necesario??-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <!-- icono de escritorio-->
+    <link rel="apple-touch-icon" href="images/helmet.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/helmet&ball.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/helmet&ball.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/helmet&ball.png">
+    <!--pagina de carga previa -->
+    <link rel="apple-touch-startup-image" href="https://3wga6448744j404mpt11pbx4-wpengine.netdna-ssl.com/startup-image.png">
+    <!-- meta para cambiar el titulo de la pagina	-->
+    <meta name="apple-mobile-web-app-title" content="Fefa">
+    <!-- metas para ocultar barra de navegación de navegadores-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- pone fondo de la parte superior del movil (bateria, hora,...) del mismo color que el fondo-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- METAS ANDROID -->
+    <!--icono de escritorio -->
+    <link rel="shortcut icon" sizes="196x196" href="images/helmetBall.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!--¿bootstrap?-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <title>FEFA</title>
 </head>
 
 <body>
-	<div id="app" class="body">
-		<header>
-			<!--logo equipo (si seleccionado)-->
-
-			<!-- 
+    <div id="app" class="body">
+        <header>
+            <!--logo equipo (si seleccionado)-->
+            <!-- 
 			<div  v-for="id in teams">
 			<p v-if="id=={{id.id}}">
 -->
-			<img class="logoL" src="images/nysl_logo.png">
-			<!--				</p></div> -->
+            <img class="logoL" src="images/nysl_logo.png">
+            <!--				</p></div> -->
 
-			<!--logo liga con hipervinculo al inicio-->
-			<img v-on:click="selectedWindow" data-option="menu" class="logoC" src="images/fefa2.png">
-			<!--log ing/log out-->
-			<img class="logoL" src="images/nysl_logo.png">
-		</header>
+            <!--logo liga con hipervinculo al inicio-->
+            <img v-on:click="selectedWindow" data-option="menu" class="logoC" src="images/fefa2.png">
+            <!--log ing/log out-->
+            <img class="logoL" src="images/nysl_logo.png">
+        </header>
 
-		<!--v-show=teamRullete se muestra en menu, y matches-->
-		
-		<div  v-show="teamMenu">
-		<!--cambiar -->
-			<select class="options" id="team" @click="selectedInformation">
-				<option> </option>
-				<option v-for="team in teams">
-					{{team.name}}
-				</option>
-			</select>
-		</div>
+        <!--v-show=teamRullete se muestra en menu, y matches te permite escoger equipo-->
+        <div v-show="teamMenu" class="options">
+            <div id="team" @click="selectTeam">
+                <p class="margin"> </p>
+                <p :data-selectTeam="team.id" v-for="team in teams">
+                    {{team.name}}</p>
+            </div>
+        </div>
 
-		<!-- PAGINA PRINCIPAL -->
+        <!-- PAGINA PRINCIPAL // menu -->
+        <div v-show="menu" class="center">
+            <div v-on:click="selectedWindow" data-option="matches" id="election" class="button">Partidos
+            </div>
 
-		<div v-show="menu" class="center">
-			<div v-on:click="selectedWindow" data-option="matches" id="election"  class="button">Partidos
-			</div>
+            <div v-on:click="selectedWindow" data-option="LocationList" id="locationsList" class="button">Localizaciones
+            </div>
 
-			<div v-on:click="selectedWindow" data-option="LocationList" id="locationsList"  class="button">Localizaciones
-			</div>
+            <div v-on:click="selectedWindow" data-option="chat" id="chat" class="button">
+                <div>Chat</div>
+            </div>
+        </div>
 
-			<div v-on:click="selectedWindow" data-option="chat" id="chat"  class="button"><div>Chat</div>
-			</div>
-		</div>
-		
-		<!-- cambio de bloque-->
-		<!--PAGINA DE MATCHES-->
-		<div v-show="matchesV" > 
-		<div class="options" @change="selectedInformation">
-			<div>
-				<select id="date" class="date">
-					<option>Escoge una jornada </option>
-					<option v-for="date in matches ">
-						<span class="date">Semana {{date.week}} </span>
-					</option>
-				</select>
-				<div> se tiene que mostrar la info de dia y hora junto con el nombre del estadio y/o dirección</div>
-			</div>
-		</div>
+        <!-- CAMBIO DE BLOQUE-->
+        <!--PAGINA DE MATCHES-->
+        <div v-show="matchesV">
+            <div>
+                <select id="date" class="date" @change="selectedWeek">
+                    <option value=''>Escoge una jornada</option>
+                    <option v-for="date in matches ">
+                        <span class="date">Semana {{date.week}} </span>
+                    </option>
+                </select>
 
-		</div>
-		<!--------------si escoges equipo y semana,  SE MOSTRARA EL MAPA 
-		<div>
-			<p class="map"><iframe :src=urlSelected width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
-		</div>
+            </div>
+
+            <!-- no eliges nada-->
+            <div v-if="nameTeamActive==null && weekSelected==''">
+                <p>
+                    tienes que elegir equipo y/o fecha
+                </p>
+                <div>
+                    <p v-for="date in matches ">
+                        <span class="date">Semana {{date.week}} </span>
+
+                    </p>
+                </div>
+
+            </div>
+            <!-- eliges 1 equipo pero no semana-->
+            <div v-if="nameTeamActive!=null && weekSelected==''">
+                <p>
+                    tienes que elegir una semana - solo se tienen que mostrar los partidos de ese equipo
+
+                </p>
+                <div>
+                    <div v-for="date in matches ">
+
+                        <span class="date">Semana {{date.week}} </span>
+                        <div v-for="team in teams">
+                            <p v-if="team.id==nameTeamActive"> {{team.name}}
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- eliges 1 semana pero no 1 equipo-->
+            <div v-if="nameTeamActive==null && weekSelected!=''">
+                <p> has escogido semana pero no equipo
+                    listado de las 6 semanas con ruta
+                </p>
+            </div>
+
+            <!-- eliges 1 equipo y una semana OK!! PDTE METER DÍA DE JUEGO-->
+
+            <div v-if="nameTeamActive!=null && weekSelected!=''">
+                <div v-for="team in teams">
+                    <div v-for="match in matches">
+                        <div v-if="weekSelected=='Semana '+match.week">
+                            <div v-for='inf in match.info' v-if="inf.teamLocal==nameTeamActive && team.id==nameTeamActive">
+                                <!-- <div> {{team.name}} vs-->
+                                <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis contra los </span>{{team.name}} <span>el a las {{inf.hour}}</span></div>
+                                <div class="map"> <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+
+                            <div v-for='inf in match.info' v-if="inf.teamVisit==nameTeamActive && team.id==inf.teamLocal">
+                                <span>Jugáis contra los </span>{{team.name}} <span>el a las {{inf.hour}}</span>
+                                <!--                                    <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis contra los </span>{{team.name}} <span>el  a las {{inf.hour}}</span> </div>-->
+                                <!--                                </div>-->
+                                <div class="map">
+                                    <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CAMBIO DE BLOQUE-->
+        <!-- PAGINA LISTADO MAPAS -->
+        <div v-show="locationsList" v-if="!locationMap">
+            <h3>Ubicaciones</h3>
+            <ul>
+                <li v-for="team in teams" :data-stadium="team.id" class="hyperlink" v-on:click="selectStadium" v-on:click="stadium"> {{team.stadium}}</li>
+            </ul>
+        </div>
+        <!-- PAGINA MAPA CONCRETO DESDE LISTADO MAPAS -->
+        <div v-if="locationMap" id="locationMap" class="center">
+            <h3>{{teamStadium.name}}</h3>
+            <h4 class="space"> {{teamStadium.adress}}</h4>
+            <p class="map"><iframe :src=teamStadium.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+            <div class="back">
+                <input type="button" value="Volver">
+            </div>
+
+        </div>
+        <!-- CAMBIO DE BLOQUE-->
+        <!-- PAGINA CHAT-->
+        <!--
+        <div v-show="chat" > 
+        
+        </div>
+        
 -->
-		<!--------------filtras fecha, escoges equipo
-		<div>
-			se muestran los 2 partidos de la semana en lista
-		</div>
--->
-		<!--------------filtras equipo, escoges fecha 
-		<div>
-			listado de las 6 semanas con ruta
-
-		</div>
-		-->
-		<!--------------si no filtras nada, listado de fines de semana
-		<div>tienes que elegir equipo y/o fecha
-			listado de las 6 semanas con toda la info
-		
-		</div>
--->
-		
-			<!-- cambio de bloque-->
-		
-		<!-- PAGINA LISTADO MAPAS -->
-		<div v-show="locationsList" >
-			<h3>Ubicaciones</h3>
-			<ul>
-				<li v-for="team in teams"> {{team.stadium}}</li>
-			</ul>
-		</div>
-
-		<!-- PAGINA MAPA CONCRETO DESDE LISTADO MAPAS 
-		<div id="locationMap" class="center">
-			<h3>{{selectedName}}</h3>
-			<p> {{selectedAddress}}</p>
-			<p class="map"><iframe :src=urlSelected width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
-			<div class="back">
-				<input type="button" value="Volver">
-			</div>
-
-		</div>
--->
-
-
-
-	</div>
-
-	<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
-			authDomain: "app-fefa.firebaseapp.com",
-			databaseURL: "https://app-fefa.firebaseio.com",
-			projectId: "app-fefa",
-			storageBucket: "app-fefa.appspot.com",
-			messagingSenderId: "837454779753"
-		};
-		firebase.initializeApp(config);
-	</script>
-	<script src="js/app.js"></script>
-
+        <!--        </div>-->
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
+            authDomain: "app-fefa.firebaseapp.com",
+            databaseURL: "https://app-fefa.firebaseio.com",
+            projectId: "app-fefa",
+            storageBucket: "app-fefa.appspot.com",
+            messagingSenderId: "837454779753"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

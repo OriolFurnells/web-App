@@ -8,9 +8,14 @@ var app = new Vue({
 		teams: [],
 		matches: [],
 
+		//variables que relleno mediante funciones
 		temporalInfo: [],
 		moreInfo2: [],
 		election: "",
+		nameTeamActive: null,
+		teamStadium: {},
+		weekSelected: "",
+		
 
 		//id de paginas:
 		menu: "",
@@ -18,41 +23,31 @@ var app = new Vue({
 		locationsList: "",
 		chat: "",
 		locationsMap: "",
-
-		teamActive: [],
-
-		//---------------
-		selection: "",
-
-		idTeam: "2",
-		
-		
+	
 		//BOLEANOS PARA V-SHOW
 		teamMenu: true,
 		menu: true,
 		matchesV: false,
 		locationsList: false,
 		chat: false,
+		locationMap: false,
+		teamSelected: false,
+		dateSelected: false,
 
 
-		selectedTeamName: "",
-		weekSelected: "",
+		//------------------
+		
+
 
 		logoChange: "",
-		teamsStadium: [],
-		teamsUrl: [],
-		teamsAdress: [],
-		teamId: [],
+		
+		weeks: [],
 
-		selectedAddress: "Av. d'Alfons XIII, 379, 08918 Santa Coloma de Gramenet, Barcelona",
-		urlSelected: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.065074239576!2d2.2215220149386297!3d41.436863479259635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4bb5f7d773705%3A0x69197af7dc49dc93!2sAv.+de+Alfonso+XIII%2C+379%2C+08918+Sta+Coloma+de+Gramanet%2C+Barcelona!5e1!3m2!1ses!2ses!4v1547734613140",
-
-
-
-		week: "1",
-
-		dates: ["12/12/2018", "09/03/2018"],
+		dates: [],
 		hours: [],
+		
+		
+		urlMap: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.5634684217384!2d-0.9250836845654563!3d41.66782937923937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd596b5d2fc0bf7f%3A0x6d51881bdfa07f5b!2sCamino+de+Monzalbarba%2C+318%2C+50011+Zaragoza!5e1!3m2!1ses!2ses!4v1547733469527",
 		address: [],
 		favorite: false,
 		dayNumber: 0,
@@ -70,7 +65,7 @@ var app = new Vue({
 	},
 
 	methods: {
-	
+
 		//función de arranque
 		start: function () {
 			fetch("https://api.myjson.com/bins/12sxs0", {
@@ -87,7 +82,7 @@ var app = new Vue({
 
 				app.changeDate();
 				app.extractInfo();
-				//				app.moreInformation();
+
 
 			}).catch(function (error) {
 				console.log("Request failed:" + error.message);
@@ -160,7 +155,7 @@ var app = new Vue({
 				app.temporalInfo = app.matches[i].info;
 				app.moreInfo2.push(app.temporalInfo);
 			}
-			console.log(app.moreInfo2)
+						console.log(app.moreInfo2)
 
 			//funciona OK - extraigo información concreta de todas las jornadas, PDTE CAMBIAR POR PARAMETROS PARA FECHA - HORA (para la ventana de MATCHES - MORE INFO)
 			for (let k = 0; k < app.moreInfo2.length; k++) {
@@ -168,75 +163,85 @@ var app = new Vue({
 					app.hours = app.moreInfo2[k][v].hour;
 				}
 			}
+			
+			for (let k = 0; k < app.moreInfo2.length; k++) {
+				for (let v = 0; v < app.moreInfo2[k].length; v++) {
+					app.dates = app.moreInfo2[k][v].date;
+				}
+			console.log(app.dates)
+			}
+			
+			
 
 			//pdte función de fecha
 		},
 
-		//funciona OK, marca el equipo PDTE fecha activos
-		selectedInformation: function () {
-			app.teamActive = [];
-
-			app.selectedTeamName = document.getElementById("team").value;
-			app.weekSelected = document.getElementById("date").value;
-						console.log(app.weekSelected);
-
-
-
-			//pdte igualar array teamActive con el value seleccionado 
-
-
-			for (let i = 0; i < app.teams.length; i++) {
-				//			console.log(app.teams[i].name);
-				console.log(app.selectedTeamName);
-				console.log(app.selectedTeamName);
-				if (app.selectedName == app.teams.name) {
-
-					app.teamActive = app.teams
-				}
-
-			}
-			console.log(app.teamActive)
-
-
-		},
+		//		//funciona OK, marca el equipo PDTE fecha activos
+				selectedWeek: function () {
+					app.weekSelected = document.getElementById("date").value;
+				},
 
 		//funciona OK coge el valor del data attribute de options y  cambia el valor de los booleanos de v-show
 		selectedWindow: function () {
 			let selectedEvent = event.target;
 			app.election = selectedEvent.getAttribute("data-option");
 			console.log(app.election)
-
-		if (app.election == "menu") {
+			
+			if (app.election == "menu") {
 				app.matchesV = false;
 				app.locationsList = false;
 				app.chat = false;
-				app.menu= true;
+				app.menu = true;
 				app.teamMenu = true;
+				app.locationMap = false;
 
-			}else if (app.election == "matchesV") {
+			} else if (app.election == "matches") {
 				app.matchesV = true;
 				app.locationsList = false;
 				app.chat = false;
-				app.menu= false;
+				app.menu = false;
 				app.teamMenu = true;
-			}
-			else if (app.election == "LocationList") {
+				app.locationMap = false;
+			} else if (app.election == "LocationList") {
 				app.matchesV = false;
 				app.locationsList = true;
 				app.chat = false;
-				app.menu= false;
+				app.menu = false;
 				app.teamMenu = false;
-			}
-			else if (app.election == "chat") {
+				app.locationMap = false;
+			} else if (app.election == "chat") {
 				app.matchesV = false;
-				app.locationsList = false ;
+				app.locationsList = false;
 				app.chat = true;
-				app.menu= false;
+				app.menu = false;
 				app.teamMenu = false;
 			}
 		},
 
+		selectTeam: function () {
+			let selectedTeam = event.target;
+			app.nameTeamActive = selectedTeam.getAttribute("data-selectTeam");
+			console.log(app.nameTeamActive)
+		},
 
+		//funciona, detecta equipo seleccionado y devuelve ID
+		selectStadium: function () {
+			let selected = event.target;
+			app.nameTeamActive = selected.getAttribute("data-stadium");
+			console.log(app.nameTeamActive);
+			app.locationMap = true;
+			console.log("hola")
+			app.teamStadium = [];
+			for (let i = 0; i < app.teams.length; i++)
+				if (app.nameTeamActive == app.teams[i].id) {
+					app.teamStadium = app.teams[i]
+				}
+			//				console.log(app.teamStadium);
+
+		},
+
+		//		stadium: function(){
+		//		}
 
 	},
 });
