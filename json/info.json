@@ -2,7 +2,7 @@
 	"teams": [{
 			"id": 1,
 			"name": "Badalona Dracs Football Team",
-			"logo": "/images/1.png",
+			"logo": "images/1.png",
 			"stadium": "Campo de Fútbol Badalona Sud",
 			"urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.065074239576!2d2.2215220149386297!3d41.436863479259635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4bb5f7d773705%3A0x69197af7dc49dc93!2sAv.+de+Alfonso+XIII%2C+379%2C+08918+Sta+Coloma+de+Gramanet%2C+Barcelona!5e1!3m2!1ses!2ses!4v1547734613140",
 			"adress": "Av. d'Alfons XIII, 379, 08918 Santa Coloma de Gramenet, Barcelona"
@@ -10,7 +10,7 @@
 		{
 			"id": 2,
 			"name": "Mallorca Voltors",
-			"logo": "/images/2.png",
+			"logo": "images/2.png",
 			"stadium": "Polideportivo Municipal de Son Moix",
 			"urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2506.270870258536!2d2.6253462148684914!3d39.58697137947022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12979285b46dfe17%3A0x6baeff2e88cb828c!2sCam%C3%AD+de+la+Vileta%2C+40%2C+07011+Palma%2C+Illes+Balears!5e1!3m2!1ses!2ses!4v1547734815808",
 			"adress": "Camí de la Vileta, 40, 07011 Palma, Illes Balears"
@@ -18,7 +18,7 @@
 		{
 			"id": 3,
 			"name": "Valencia Firebats",
-			"logo": "/images/3.png",
+			"logo": "images/3.png",
 			"stadium": "Estadio Municipal Jardín del Turia",
 			"urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2510.236376100968!2d-0.39531868513557333!3d39.47720997948533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f5d65762d77%3A0x617309a9a701a3aa!2sEstadio+de+Atletismo+del+Turia!5e1!3m2!1ses!2ses!4v1547734751949",
 			"adress": "Cauce del rio Turia, Tramo III, 46008 Valencia"
@@ -26,7 +26,7 @@
 		{
 			"id": 4,
 			"name": "Racing Zaragoza Hurricanes",
-			"logo": "../images/4.png",
+			"logo": "images/4.png",
 			"stadium": "Parque Deportivo Ebro",
 			"urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.5634684217384!2d-0.9250836845654563!3d41.66782937923937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd596b5d2fc0bf7f%3A0x6d51881bdfa07f5b!2sCamino+de+Monzalbarba%2C+318%2C+50011+Zaragoza!5e1!3m2!1ses!2ses!4v1547733469527",
 			"adress": "Camino de Monzalbarba, 318, 50011 Zaragoza"
@@ -37,12 +37,14 @@
 			"week": 1,
 			"info": [{
 					"date": "02/02/2019",
+                    "dateText":"2 de Febrero del 2019",
 					"hour": "12.00h",
 					"teamLocal": 1,
 					"teamVisit": 2
 				},
 				{
 					"date": "02/02/2019",
+                    "dateText":"2 de Febrero del 2019",
 					"hour": "09.00h",
 					"teamLocal": 3,
 					"teamVisit": 4
@@ -53,12 +55,14 @@
 			"week": 2,
 			"info": [{
 					"date": "09/02/2019",
+                    "dateText":"9 de Febrero del 2019",
 					"hour": "09.00h",
 					"teamLocal": 2,
 					"teamVisit": 3
 				},
 				{
 					"date": "09/02/2019",
+                    "dateText":"9 de Febrero del 2019",
 					"hour": "12.00h",
 					"teamLocal": 4,
 					"teamVisit": 1
@@ -69,12 +73,14 @@
 			"week": 3,
 			"info": [{
 					"date": "16/02/2019",
+                    "dateText":"16 de Febrero del 2019",
 					"hour": "11.00h",
 					"teamLocal": 1,
 					"teamVisit": 3
 				},
 				{
 					"date": "17/02/2019",
+                    "dateText":"17 de Febrero del 2019",
 					"hour": "11.00h",
 					"teamLocal": 2,
 					"teamVisit": 4
@@ -85,12 +91,14 @@
 			"week": 4,
 			"info": [{
 					"date": "02/03/2019",
+                    "dateText":"2 de Marzo del 2019",
 					"hour": "11.00h",
 					"teamLocal": 2,
 					"teamVisit": 1
 				},
 				{
 					"date": "03/03/2019",
+                    "dateText":"3 de Marzo del 2019",
 					"hour": "11.00h",
 					"teamLocal": 4,
 					"teamVisit": 3
@@ -101,12 +109,14 @@
 			"week": 5,
 			"info": [{
 					"date": "09/03/2019",
+                    "dateText":"9 de Marzo del 2019",
 					"hour": "10.00h",
 					"teamLocal": 3,
 					"teamVisit": 2
 				},
 				{
 					"date": "10/03/2019",
+                    "dateText":"10 de Marzo del 2019",
 					"hour": "12.00h",
 					"teamLocal": 1,
 					"teamVisit": 4
@@ -117,12 +127,14 @@
 			"week": 6,
 			"info": [{
 					"date": "16/03/2019",
+                    "dateText":"16 de Marzo del 2019",
 					"hour": "10.00h",
 					"teamLocal": 3,
 					"teamVisit": 1
 				},
 				{
 					"date": "17/03/2019",
+                    "dateText":"17 de Marzo del 2019",
 					"hour": "11.00h",
 					"teamLocal": 4,
 					"teamVisit": 2
