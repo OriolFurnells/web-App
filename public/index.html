@@ -36,30 +36,30 @@
     <div id="app" class="body">
         <div class="structure">
             <!--logo equipo (si seleccionado)-->
-            <div class="logoTeam" > 
-                <div v-for="team in teams" v-if="nameTeamActive==team.id"> 
-                <img class="logo" :src=team.logo>
-                </div>   
+            <div class="logoTeam">
+                <div v-for="team in teams" v-if="nameTeamActive==team.id">
+                    <img class="logo" :src=team.logo>
+                </div>
             </div>
             <!--logo liga con hipervinculo al inicio-->
-            <div v-on:click="selectedWindow" data-option="menu" class="logoLeague"> 
-                <img class="logo" src="images/fefa3.png"></div>
+            <div v-on:click="selectedWindow" data-option="menu" class="logoLeague">
+                <img class="logo" src="images/fefa.png"></div>
             <!--log ing/log out-->
-            <div class="login"> 
-                <img class="logo" src="images/nysl_logo.png">
-               
+            <div class="login">
+                <img class="logo" src="images/login.png">
+
             </div>
 
             <!-- cambiar opciones por iconos-->
             <div class="menu">
-                <p v-on:click="selectedWindow" data-option="matches" id="election" class="button">Partidos</p>
-                <p v-on:click="selectedWindow" data-option="LocationList" id="locationsList" class="button">Localizaciones</p>
-                <p v-on:click="selectedWindow" data-option="chat" id="chat" class="button">Chat</p>
+                <p> <img class="logoMenu" v-on:click="selectedWindow" data-option="matches" id="election" src="images/Football_Ball.png"></p>
+                <p><img class="logoMenu" v-on:click="selectedWindow" data-option="LocationList" id="locationsList" src="images/localizacion.png"></p>
+                <p><img class="logoMenu" v-on:click="selectedWindow" data-option="chat" src="images/chat.png"></p>
             </div>
 
 
             <!--v-show=teamRullete se muestra en menu, y matches te permite escoger equipo-->
-            <div v-show="teamMenu" class="options info">
+            <div v-show="teamMenu" class="options ">
                 <div id="team" @click="selectTeam">
                     <p :data-selectTeam="team.id" v-for="team in teams">
                         {{team.name}}</p>
@@ -70,13 +70,14 @@
 
             <!-- CAMBIO DE BLOQUE-->
             <!--PAGINA DE MATCHES  PDTE METER DÍA DE JUEGO-->
-            <div v-show="matchesV" class="info">
-                <div class="options" >
+            <div v-show="matchesV" class=" week">
+                <div>
                     <div @click="selectedWeek">
                         <p :data-selectWeek="date.week" v-for="date in matches"> Semana {{date.week}}</p>
                     </div>
                 </div>
-
+            </div>
+            <div v-show="matchesV" class="containMatches">
                 <!-- no eliges nada-->
                 <div v-if="nameTeamActive==null && weekSelected==''">
                     <div> Escoge una semana y/o un equipo</div>
@@ -102,7 +103,7 @@
                         <div v-for="match in matches">
                             <div v-if="weekSelected=='Semana '+match.week">
                                 <div v-for='inf in match.info' v-if="inf.teamLocal==team.id">
-                                    <div :data-selectTeam="team.id" @click="selectTeam"> {{team.name}} vs
+                                    <div :data-selectTeam="team.id" class="space" @click="selectTeam"> {{team.name}} vs
                                         <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span :data-selectTeam="team.id" @click="selectTeam">{{team.name}} </span></div>
                                     </div>
                                 </div>
@@ -120,7 +121,7 @@
                                 <div v-for='inf in match.info' v-if="inf.teamLocal==nameTeamActive && team.id==nameTeamActive">
                                     <!-- <div> {{team.name}} vs-->
                                     <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis como locales contra los </span>{{team.name}} <span>el {{inf.dateText}} a las {{inf.hour}}</span></div>
-                                    <div class="map"> <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    <div class="mapMatches"> <iframe :src=team.urlMap frameborder="0" style="border:0" allowfullscreen></iframe>
                                     </div>
                                 </div>
 
@@ -128,7 +129,7 @@
                                     <span>Jugáis como visitantes contra los </span>{{team.name}} <span>el {{inf.dateText}} a las {{inf.hour}}</span>
                                     <!--                                    <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis contra los </span>{{team.name}} <span>el  a las {{inf.hour}}</span> </div>-->
                                     <!--                                </div>-->
-                                    <div class="map">
+                                    <div class="mapMatches">
                                         <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
                                 </div>
                             </div>
@@ -139,47 +140,63 @@
 
             <!-- CAMBIO DE BLOQUE-->
             <!-- PAGINA LISTADO MAPAS -->
-            <div v-show="locationsList" v-if="!locationMap"  class="info">
+            <div v-show="locationsList" v-if="!locationMap" class="info">
                 <h3>Ubicaciones</h3>
                 <ul>
                     <li v-for="team in teams" :data-stadium="team.id" class="hyperlink" v-on:click="selectStadium" v-on:click="stadium"> {{team.stadium}}</li>
                 </ul>
             </div>
             <!-- PAGINA MAPA CONCRETO DESDE LISTADO MAPAS -->
-            <div v-if="locationMap" id="locationMap" class="center info">
-                <h3>{{teamStadium.name}}</h3>
-                <h4 class="space"> {{teamStadium.adress}}</h4>
-                <p class="map"><iframe :src=teamStadium.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+            <div v-show="locationsList" v-if="locationMap" id="locationMap" class="info">
+                <p class="tittleLocation">{{teamStadium.name}}</p>
+                <p class="space directionLocation"> {{teamStadium.adress}}</p>
+                <p class="mapLocation"><iframe :src=teamStadium.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+                <!--
                 <div class="back">
                     <input type="button" value="Volver">
                 </div>
+-->
 
             </div>
             <!-- CAMBIO DE BLOQUE-->
             <!-- PAGINA CHAT-->
 
             <div v-show="chat" class="info">
-                <div> conversation</div>
-                <div> text </div>
+
+                <p> Sala principal </p>
+                <div class="chatRoom" id="conversation"></div>
+                <div >
+                    <form class="SendMessage">
+                    <ipunt id="message" type="text" name="sendChat" class="newMessage"> </ipunt>
+                    <button @click="conversation" class="buttonChat"> Enviar</button>
+                    </form>
+                </div>
             </div>
-
-
-            <!--        </div>-->
+            <div v-show="">
+                <p>Sala privada</p>
+                <div id="conversationPrivate"></div>
+                <div id="messagePrivate"> text </div>
+            </div>
         </div>
-        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
-                authDomain: "app-fefa.firebaseapp.com",
-                databaseURL: "https://app-fefa.firebaseio.com",
-                projectId: "app-fefa",
-                storageBucket: "app-fefa.appspot.com",
-                messagingSenderId: "837454779753"
-            };
-            firebase.initializeApp(config);
-        </script>
-        <script src="js/app.js"></script>
+
+
+        <!--        </div>-->
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
+            authDomain: "app-fefa.firebaseapp.com",
+            databaseURL: "https://app-fefa.firebaseio.com",
+            projectId: "app-fefa",
+            storageBucket: "app-fefa.appspot.com",
+            messagingSenderId: "837454779753"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+    <script src="js/app.js"></script>
     </div>
 </body>
 
