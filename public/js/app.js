@@ -33,35 +33,36 @@ var app = new Vue({
         locationMap: false,
         teamSelected: false,
         dateSelected: false,
+        conected: false,
 
 
         //------------------
 
         logoChange: "",
-
+        needConexion: "Necesitas estar conectado para usar el chat",
+        sendMessage: "Enviar un mensaje para ver la conversación",
         weeks: [],
         address: [],
         dates: [],
         hours: [],
 
         provider: "",
-        message:"",
-        userNameChat:"",
+        message: "",
+        userNameChat: "",
         favorite: false,
-        dayNumber: 0,
-        monthNumber: 0,
-        year: 0,
-        monthText: "",
-        monthYear: ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-        dateText: [],
-        
+
+        //        dayNumber: 0,
+        //        monthNumber: 0,
+        //        year: 0,
+        //        monthText: "",
+        //        monthYear: ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        //        dateText: [],
+
 
     },
 
     created: function () {
         this.start();
-        this.convert();
-
     },
 
     methods: {
@@ -88,62 +89,61 @@ var app = new Vue({
                 console.log("Request failed:" + error.message);
             })
         },
-
-        //función para convertir fecha numerica en texto, suprime 0 si van delatne OK--
-        //                changeDate: function () {
-        //
-        //                    //            console.log(app.dates)
-        //                    //            console.log("hola")
-        //                    let month = "";
-        //                    let day = "";
-        //                    //			this.dates= "03/03/2018"
-        //                    for (let i = 0; i < this.dates.length; i++) {
-        //                        //this.dates = ;
-        //                        //				console.log(this.dates)
-        //                        day = this.dates[i].slice(0, 2);
-        //                        //				console.log(day)
-        //                        let dayFirst = day.slice(0, 1);
-        //
-        //                        if (dayFirst == "0") {
-        //                            this.dayNumber = this.dates[i].slice(1, 2);
-        //                            //                    console.log(this.dayNumber)
-        //                        } else {
-        //                            this.dayNumber = this.dates[i].slice(0, 2);
-        //                            //                    console.log(this.dayNumber)
-        //                        }
-        //
-        //                        //				console.log(this.dayNumber)
-        //
-        //                        month = this.dates[i].slice(3, 5);
-        //                        let monthFirst = month.slice(0, 1);
-        //
-        //                        if (monthFirst == "0") {
-        //                            //                    console.log(montFirst)
-        //                            this.monthNumber = this.dates[i].slice(4, 5);
-        //                        } else {
-        //                            this.monthNumber = this.dates[i].slice(3, 5);
-        //                        }
-        //
-        //                        this.year = this.dates[i].slice(6, 10);
-        //                        //				console.log(this.monthNumber)
-        //                        this.monthText = this.monthYear[this.monthNumber];
-        //                        //				console.log(this.monthText)
-        //
-        //                        let fecha = this.dayNumber + " de " + this.monthText + " del " + this.year;
-        //                        //				console.log(fecha);
-        //                        //			console.log(this.dateText)
-        //                        this.dateText.push(fecha);
-        //                    }
-        //                    //            console.log(this.dateText)
-        //
-        //                },
-        //¿?¿?¿
+        /*
+                //función para convertir fecha numerica en texto, suprime 0 si van delatne OK--
+                //                changeDate: function () {
+                //
+                //                    //            console.log(app.dates)
+                //                    //            console.log("hola")
+                //                    let month = "";
+                //                    let day = "";
+                //                    //			this.dates= "03/03/2018"
+                //                    for (let i = 0; i < this.dates.length; i++) {
+                //                        //this.dates = ;
+                //                        //				console.log(this.dates)
+                //                        day = this.dates[i].slice(0, 2);
+                //                        //				console.log(day)
+                //                        let dayFirst = day.slice(0, 1);
+                //
+                //                        if (dayFirst == "0") {
+                //                            this.dayNumber = this.dates[i].slice(1, 2);
+                //                            //                    console.log(this.dayNumber)
+                //                        } else {
+                //                            this.dayNumber = this.dates[i].slice(0, 2);
+                //                            //                    console.log(this.dayNumber)
+                //                        }
+                //
+                //                        //				console.log(this.dayNumber)
+                //
+                //                        month = this.dates[i].slice(3, 5);
+                //                        let monthFirst = month.slice(0, 1);
+                //
+                //                        if (monthFirst == "0") {
+                //                            //                    console.log(montFirst)
+                //                            this.monthNumber = this.dates[i].slice(4, 5);
+                //                        } else {
+                //                            this.monthNumber = this.dates[i].slice(3, 5);
+                //                        }
+                //
+                //                        this.year = this.dates[i].slice(6, 10);
+                //                        //				console.log(this.monthNumber)
+                //                        this.monthText = this.monthYear[this.monthNumber];
+                //                        //				console.log(this.monthText)
+                //
+                //                        let fecha = this.dayNumber + " de " + this.monthText + " del " + this.year;
+                //                        //				console.log(fecha);
+                //                        //			console.log(this.dateText)
+                //                        this.dateText.push(fecha);
+                //                    }
+                //                    //            console.log(this.dateText)
+                //
+                //                },
+                */
         option: function (array, teamSelected, change) {
             for (let i = 0; i < array.length; i++)
                 if (Selected == array[i]) {
                     Change = Selected;
                 }
-
         },
 
         //obtengo información
@@ -194,34 +194,43 @@ var app = new Vue({
             console.log(app.election)
 
             if (app.election == "menu") {
+                app.menu = true;
+                app.teamMenu = true;
                 app.matchesV = false;
                 app.locationsList = false;
                 app.chat = false;
-                app.menu = true;
-                app.teamMenu = true;
                 app.locationMap = false;
 
             } else if (app.election == "matches") {
                 app.matchesV = true;
+                app.teamMenu = true;
                 app.locationsList = false;
                 app.chat = false;
                 app.menu = false;
-                app.teamMenu = true;
                 app.locationMap = false;
             } else if (app.election == "LocationList") {
-                app.matchesV = false;
                 app.locationsList = true;
+                app.matchesV = false;
                 app.chat = false;
                 app.menu = false;
                 app.teamMenu = false;
                 app.locationMap = false;
             } else if (app.election == "chat") {
+                app.chat = true;
                 app.matchesV = false;
                 app.locationsList = false;
-                app.chat = true;
                 app.menu = false;
                 app.teamMenu = false;
             }
+        },
+
+        resetTeam: function () {
+            app.nameTeamActive= null
+
+        },
+        resetWeek: function () {
+
+            app.weekSelected= ""
         },
 
         selectTeam: function () {
@@ -245,82 +254,104 @@ var app = new Vue({
             //				console.log(app.teamStadium);
 
         },
-
-
         selectedWeek: function () {
             let selectedTeam = event.target;
             app.weekSelected = "Semana " + selectedTeam.getAttribute("data-selectWeek");
             console.log(app.weekSelected)
         },
-
-
-
         /////////-------------------
 
-        //-----------
+        prueba: function () {
+            this.message = document.getElementById("message").value;
+            console.log(this.message)
+        },
+        //FUNCIONES CHAT
         //función de log in
         login: function () {
-
             //documentación
             // https://firebase.google.com/docs/auth/web/google-signin
 
             // Provider
             this.provider = new firebase.auth.GoogleAuthProvider();
+            //            this.provider = new firebase.auth.FacebookAuthProvider();
 
             // How to Log In
-            firebase.auth().signInWithPopup(provider)
+            firebase.auth().signInWithPopup(this.provider)
                 .then(function () {
                     //       console.log(firebase.auth());
+                    app.conected = true;
+                    console.log("conectado")
+                    //                console.log(this.userNameChat);
+                    console.log(app.conected);
 
                 })
                 .catch(function () {
                     alert("El usuario o la contraseña son erroneos");
                 });
+        },
 
+        logout: function () {
+            firebase.auth().signOut().then(function () {
+                app.conected = false;
+                console.log("DESCONECTADO");
+                console.log(this.conected);
+                // Sign-out successful.
+            }).catch(function (error) {
+                // An error happened.
+            });
+        },
 
+        printChat: function () {
+            this.conversation();
+            this.getPosts();
+            
+            document.getElementById("message").innerHTML ="";
+        },
 
-
-        }, 
-        conversation:function () {
+        conversation: function () {
             // https://firebase.google.com/docs/database/web/read-and-write
-
             // Values
-            this.message = document.getElementById("message");
-            this.userNameChat = "Name from firebase";
+            this.message = document.getElementById("message").value;
+            console.log(this.message)
+            this.userNameChat = firebase.auth().currentUser.displayName;
+            //            console.log("userNameChat"+this.userNameChat)
 
-            return firebase.database().ref("ubiqum").push({
-                name: userName,
-                body: text
+            return firebase.database().ref("fefaGeneral").push({
+                name: this.userNameChat,
+                body: this.message
+
             });
 
+        },
+        getPosts: function () {
+            firebase.database().ref('fefaGeneral').on('value', function (data) {
+
+                var posts = document.getElementById("conversation");
+
+                posts.innerHTML = "";
+
+                var messages = data.val();
+
+                for (var key in messages) {
+                    var text = document.createElement("div");
+                    var lineName = document.createElement("div");
+                    text.setAttribute("class", "chatcontainer")
+                    var element = messages[key];
+                    console.log(element);
+
+                    lineName.append(element.name);
+                    lineName.append(":");
+
+                    text.append(element.body);
+                    posts.append(lineName);
+                    posts.append(text);
+                }
+
+            })
+
+            console.log("getting posts");
+
         }
-
-
-//        function getPosts() {
-//
-//            firebase.database().ref('ubiqum').on('value', function (data) {
-//
-//
-//                var posts = document.getElementById("posts");
-//
-//                posts.innerHTML = "";
-//
-//                var messages = data.val();
-//
-//                for (var key in messages) {
-//                    var text = document.createElement("div");
-//                    text.setAttribute("class", "chatcontainer")
-//                    var element = messages[key];
-//
-//                    text.append(element.body);
-//                    posts.append(text);
-//                }
-//
-//            })
-//
-//            console.log("getting posts");
-//
-//        }
 
     },
 });

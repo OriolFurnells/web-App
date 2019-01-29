@@ -1,128 +1,412 @@
-/*media de 667px por 375px*/
-@media (min-height: 664px) and (min-width: 375px) {
 
-    .body {
-        height: 667px;
-        width: 375px;
-/*        padding-top: 1em;*/
-    }
+ .structure {
+     display: grid;
+     grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
+     grid-template-rows: 2% 10% 10% 10% 10% 58%;
+     height: 100vh;
+ }
 
-    .structure {
-        display: grid;
-        grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
-        grid-template-rows: 2% 10% 10% 10% 10% 58%;
-        height:100vh;
-    }
+ .logoTeam {
+     grid-column: 2 / 4;
+     grid-row: 2/3;
+ }
 
-    
-    .logoMenu {
-        width: 50px;
-    }
-    .logoTeam {
-        grid-column: 2 / 4;
-        grid-row:2/3;
-    }
+ .login {
+     grid-column: 6 / 8;
+     grid-row: 2/3;
+     height: 50px;
+ }
 
-    .login {
-        grid-column: 6 / 8;
-        grid-row:2/3;
-        height: 50px;
-    }
+ .logoLeague {
+     grid-row: 2/3;
+     grid-column: 4/6;
+     height: 50px;
+ }
 
-    .logoLeague {
-        grid-row: 2/3;
-        grid-column: 4/6;
-        height: 50px;
-    }
+ .options {
+     grid-row: 4;
+     grid-column: 2/8;
+     width: 100%;
+     text-align: center;
+     height: 4em;
+     margin-bottom: 1em;
+     overflow: scroll;
+     border: black 1px solid;
+     font-size: 16px;
+ }
 
-    .logo {
-        display: flex;
-        margin: 0 auto;
-        height: 50px;
-        
-    }
+ .mapMatches {
+     grid-column: 2/8;
+     grid-row: 4/8;
+     height: 20em;
+     margin-top: 1em;
+ }
 
-    /*
-.margin{
-	height:1em;
+ .mapLocation {
+     grid-column: 4/5;
+     grid-row: 4/8;
+     height: 30em;
+     margin-right: 1em;
+ }
+
+ .week {
+     grid-column: 4/6;
+     margin-top: 1em;
+     grid-row: 5/8;
+     text-align: center;
+     height: 4em;
+     overflow: scroll;
+     font-size: 16px;
+ }
+
+ .containMatches {
+     grid-row: 6/8;
+     grid-column: 2/8;
+     padding: 1em;
+ }
+
+ .button {
+     justify-content: center;
+     align-items: center;
+     border-radius: 100%;
+     margin: 1em;
+     display: flex;
+ }
+
+ .info {
+     grid-column: 2 / 8;
+     grid-row: 4/8;
+     margin-left: 1em;
+     margin-top: 1em;
+ }
+
+ .map {
+     height: 20em;
+     margin-top: 1em;
+ }
+
+ .back {
+     margin-bottom: 1em;
+     align-content: center;
+ }
+
+ .menu {
+     grid-column: 2/8;
+     grid-row: 3;
+     display: flex;
+     /*    display:inline;*/
+     justify-content: space-around;
+ }
+
+ .chatRoom {
+     height: 16em;
+     border: black 1px solid;
+     margin-right: 1em;
+     overflow: scroll;
+
+ }
+
+ .SendMessage {
+     margin-top: 0.5em;
+     margin-right: 1em;
+     display: flex;
+ }
+
+ .newMessage {
+     height: 2.5em;
+     display: flex;
+     border: black 1px solid;
+     flex-grow: 1;
+     margin-right: 1em;
+ }
+
+ .buttonSendChat {
+     background: grey;
+ } 
+
+/* ESTANDARES */
+.logoMenu {
+     width: 50px;
+ }
+
+ .logo {
+     display: flex;
+     margin: 0 auto;
+     height: 50px;
+ }
+
+ .foto_logo {
+     display: flex;
+     margin: 0 auto;
+     height: 100%;
+ }
+
+ .space {
+     margin-bottom: 1em;
+     margin-top: 1em;
+     /*	padding-top:2em;*/
+ }
+
+ ::-webkit-scrollbar {
+     width: 3px;
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background: red;
+ }
+
+ .tittleLocation {
+     font-size: 16px;
+     text-align: center;
+     font-weight: bold;
+ }
+
+ .directionLocation {
+     text-align: center;
+     font-size: 14px;
+ }
+
+ .hyperlink {
+     text-decoration: underline;
+     padding-top: 1em;
+ }
+
+.textChat{
+    margin-top:1em;
+    margin-right:1em;
+    margin-left:1em;
+
 }
-*/
 
-    .foto_logo {
-        display: flex;
-        margin: 0 auto;
-        height: 100%;
-    }
+/* MEDIAS OK!*/
+/*-----667px por 375px --IPHONE 6/7/8----*/
+ /*media portait */
+@media (min-height: 667px) and (min-width: 375px) {
+
+     .body {
+         height: 667px;
+         width: 375px;
+         /*        padding-top: 1em;*/
+     }
+
+     .structure {
+         display: grid;
+         grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-rows: 2% 10% 10% 10% 10% 58%;
+         height: 100vh;
+     }
 
 
-    .options {
-        grid-row:4;
-        grid-column: 2/8;
-        width: 100%;
-        text-align: center;
-        height: 4em;
-        margin-bottom: 1em;
-        overflow: scroll;
-        border: black 1px solid;
-        font-size: 16px;
-        /*	border-radius: 20%;*/
-    }
-    
+     .logoTeam {
+         grid-column: 2 / 4;
+         grid-row: 2/3;
+     }
+
+     .login {
+         grid-column: 6 / 8;
+         grid-row: 2/3;
+         height: 50px;
+     }
+
+     .logoLeague {
+         grid-row: 2/3;
+         grid-column: 4/6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 4;
+         grid-column: 2/8;
+         width: 100%;
+         text-align: center;
+         height: 4em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         border: black 1px solid;
+         font-size: 16px;
+     }
+
      .mapMatches {
-        grid-column: 2/8;
-        grid-row: 4/8;
-        height: 20em;
-        margin-top: 1em;
-    }
+         grid-column: 2/8;
+         grid-row: 4/8;
+         height: 20em;
+         margin-top: 1em;
+     }
 
-    .mapLocation {
-        grid-column: 4/5;
-        grid-row: 4/8;
-        height: 30em;
-        margin-right: 1em;
-    }
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 4/8;
+         height: 30em;
+         margin-right: 1em;
+     }
 
-.week{
-        grid-column: 4/6;
-        margin-top: 1em;
-        grid-row: 5/8;
-        text-align: center;
-        height: 4em;
-        /* margin-bottom: 1em; */
-        overflow: scroll;
-        /* border: black 1px solid; */
-        font-size: 16px;
-    }
-    
+     .week {
+         grid-column: 4/6;
+         margin-top: 1em;
+         grid-row: 5/8;
+         text-align: center;
+         height: 4em;
+         overflow: scroll;
+         font-size: 16px;
+     }
+
      .containMatches {
-        grid-row: 6/8;
-        grid-column: 2/8;
-        padding: 1em;
-    }
+         grid-row: 6/8;
+         grid-column: 2/8;
+         padding: 1em;
+     }
 
-    .space {
-        margin-bottom: 1em;
-        margin-top: 1em;
-        /*	padding-top:2em;*/
-    }
 
-    .button {
-        /*	margin:1em;*/
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        margin: 1em;
-        display: flex;
-    }
+     .button {
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
 
-    .info {
-        grid-column: 2 / 8;
-        grid-row: 4/8;
-        margin-left: 1em;
-        margin-top: 1em;
-    }
+     .info {
+         grid-column: 2 / 8;
+         grid-row: 4/8;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
 
-    /*
+     .map {
+         height: 20em;
+         margin-top: 1em;
+     }
+
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
+
+     .menu {
+         grid-column: 2/8;
+         grid-row: 3;
+         display: flex;
+         /*    display:inline;*/
+         justify-content: space-around;
+     }
+
+     .chatRoom {
+         height: 30em;
+         border: black 1px solid;
+         margin-right: 1em;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+ }
+
+ /*media landscape 375px por 667px*/
+ @media (min-width: 667px) and (min-height: 375px) {
+
+     .body {
+         width: 667px;
+         height: 375px;
+     }
+
+     .structure {
+         display: grid;
+         grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-columns: 5% 20% 20% 55%;
+
+         height: 100vh;
+     }
+
+     .logoTeam {
+         grid-row: 3 / 4;
+         grid-column: 2/3;
+
+     }
+
+     .logoLeague {
+         grid-column: 2/3;
+         grid-row: 4/5;
+         height: 50px;
+     }
+
+     .login {
+         grid-column: 2/3;
+         grid-row: 5 / 6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 6/8;
+         grid-column: 2/3;
+         width: 100%;
+         text-align: center;
+         height: 6em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         /*        border: black 1px solid;*/
+         font-size: 16px;
+         /*	border-radius: 20%;*/
+     }
+
+
+
+     .week {
+         margin-left: 1em;
+         grid-row: 4/8;
+         grid-column: 3/4;
+         width: 80%;
+         text-align: center;
+         height: 8em;
+         /* margin-bottom: 1em; */
+         overflow: scroll;
+         /* border: black 1px solid; */
+         font-size: 16px;
+     }
+
+     .containMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         padding: 1em;
+     }
+
+
+     .space {
+         margin-bottom: 1em;
+         margin-top: 1em;
+         /*	padding-top:2em;*/
+     }
+
+     .button {
+         /*	margin:1em;*/
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-row: 3 / 7;
+         grid-column: 3/5;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
+
+     /*
 .center{
 	text-align:  center;
 	justify-content: center;
@@ -131,171 +415,292 @@
 }
 */
 
-    .map {
-        height: 20em;
-        margin-top: 1em;
-    }
+     .mapMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 16em;
+         margin-top: 1em;
+     }
 
-    .back {
-        margin-bottom: 1em;
-        align-content: center;
-    }
-
-    .hyperlink {
-        text-decoration: underline;
-        padding-top: 1em;
-    }
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 14em;
+         margin-right: 1em;
+     }
 
 
-    .menu {
-        grid-column: 2/8;
-        grid-row: 3;
-        display: flex;
-        /*    display:inline;*/
-        justify-content: space-around;
-    }
-    .chatRoom {
-        height: 30em;
-        border: black 1px solid;
-        margin-right: 1em;
-    }
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
 
-    .SendMessage {
-        margin-top: 0.5em;
-        margin-right: 1em;
-        display: flex;
+     .hyperlink {
+         text-decoration: underline;
+         padding-top: 1em;
+     }
 
-    }
 
-    .newMessage {
-        height: 2.5em;
-        display: flex;
-        border: black 1px solid;
-        flex-grow: 1;
-        margin-right:1em;
-    }
+     .menu {
+         grid-column: 4/4;
+         grid-row: 2/3;
+         display: flex;
 
-    .buttonSendChat {
-        background: grey;
-/*        margin-left: 2em;*/
-    }
+         justify-content: space-around;
+         /*    height: 50px;*/
+     }
+
+
+     .chatRoom {
+         height: 14em;
+         border: black 1px solid;
+         margin-right: 1em;
+         overflow: scroll;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+
+ }
+
+/*----------640*360 GALAXY S5----------------*/
+/*media portait */
+@media (min-height: 640px) and (min-width: 360px){
     
-    
-}
+     .body {
+         height: 640px;
+         width: 360px;
+     }
 
-/*media de 375px por 667px*/
-@media (min-width: 667px) and (min-height: 375px) {
+     .structure {
+         display: grid;
+         grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-rows: 2% 10% 10% 10% 10% 56% 2%;
+         height: 100vh;
+     }
 
+
+     .logoTeam {
+         grid-column: 2 / 4;
+         grid-row: 2/3;
+     }
+
+     .login {
+         grid-column: 6 / 8;
+         grid-row: 2/3;
+         height: 50px;
+     }
+
+     .logoLeague {
+         grid-row: 2/3;
+         grid-column: 4/6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 4;
+         grid-column: 2/8;
+         width: 100%;
+         text-align: center;
+         height: 4em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         border: black 1px solid;
+         font-size: 16px;
+     }
+
+     .mapMatches {
+         grid-column: 2/8;
+         grid-row: 4/8;
+         height: 16em;
+         margin-top: 1em;
+     }
+
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 4/8;
+         height: 25em;
+         margin-right: 1em;
+     }
+
+     .week {
+         grid-column: 4/6;
+         margin-top: 1em;
+         grid-row: 5/8;
+         text-align: center;
+         height: 4em;
+         overflow: scroll;
+         font-size: 16px;
+     }
+
+     .containMatches {
+         grid-row: 6/7;
+         grid-column: 2/8;
+         padding: 1em;
+     }
+
+
+     .button {
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-column: 2 / 8;
+         grid-row: 4/8;
+         margin-top: 1em;
+     }
+
+     .map {
+         height: 20em;
+         margin-top: 1em;
+     }
+
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
+
+     .menu {
+         grid-column: 2/8;
+         grid-row: 3;
+         display: flex;
+         /*    display:inline;*/
+         justify-content: space-around;
+     }
+
+     .chatRoom {
+         height: 28em;
+         border: black 1px solid;
+         margin-right: 1em;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+ }
+
+/*media landscape*/
+@media (min-width: 640px) and (min-height: 360px){
     .body {
-        width: 667px;
-        height: 375px;
-    }
+         width: 640px;
+         height: 360px;
+     }
 
-    .structure {
-        display: grid;
-        grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
-        grid-template-columns: 5% 20% 20% 55%;
+     .structure {
+         display: grid;
+         grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-columns: 5% 20% 20% 55%;
+         height: 100vh;
+     }
 
-        height: 100vh;
-    }
+     .logoTeam {
+         grid-row: 2 / 4;
+         grid-column: 2/3;
 
-    .logoTeam {
-        grid-row: 2 / 4;
-        grid-column: 2/3;
+     }
 
-    }
+     .logoLeague {
+         grid-column: 2/3;
+         grid-row: 4/5;
+         height: 50px;
+     }
 
-    .logoLeague {
-        grid-column: 2/3;
-        grid-row: 4/5;
-        height: 50px;
-    }
+     .login {
+         grid-column: 2/3;
+         grid-row: 5 / 6;
+         height: 50px;
+     }
 
-    .login {
-        grid-column: 2/3;
-        grid-row: 5 / 6;
-        height: 50px;
-    }
+     .options {
+         grid-row: 6/8;
+         grid-column: 2/3;
+         width: 100%;
+         text-align: center;
+         height: 6em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         /*        border: black 1px solid;*/
+         font-size: 16px;
+         /*	border-radius: 20%;*/
+     }
 
+     .week {
+         margin-left: 1em;
+         grid-row: 4/8;
+         grid-column: 3/4;
+         width: 80%;
+         text-align: center;
+         height: 8em;
+         /* margin-bottom: 1em; */
+         overflow: scroll;
+         /* border: black 1px solid; */
+         font-size: 16px;
+     }
 
-    .logo {
-        display: flex;
-        margin: 0 auto;
-        height: 100%;
-        width: 100px;
-    }
-
-    /*
-.margin{
-	height:1em;
-}
-*/
-
-    .foto_logo {
-        display: flex;
-        margin: 0 auto;
-        height: 100%;
-    }
-
-
-    .options {
-        grid-row: 6/8;
-        grid-column: 2/3;
-        width: 100%;
-        text-align: center;
-        height: 6em;
-        margin-bottom: 1em;
-        overflow: scroll;
-        /*        border: black 1px solid;*/
-        font-size: 16px;
-        /*	border-radius: 20%;*/
-    }
+     .containMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         padding: 1em;
+     }
 
 
+     .space {
+         margin-bottom: 1em;
+         margin-top: 1em;
+         /*	padding-top:2em;*/
+     }
 
-    .week {
-        margin-left: 1em;
-        grid-row: 4/8;
-        grid-column: 3/4;
-        width: 80%;
-        text-align: center;
-        height: 8em;
-        /* margin-bottom: 1em; */
-        overflow: scroll;
-        /* border: black 1px solid; */
-        font-size: 16px;
-    }
+     .button {
+         /*	margin:1em;*/
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
 
-    .containMatches {
-        grid-column: 4/5;
-        grid-row: 3/8;
-        padding: 1em;
-    }
+     .info {
+         grid-row: 3 / 7;
+         grid-column: 3/5;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
 
-
-    .space {
-        margin-bottom: 1em;
-        margin-top: 1em;
-        /*	padding-top:2em;*/
-    }
-
-    .button {
-        /*	margin:1em;*/
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        margin: 1em;
-        display: flex;
-    }
-
-    .info {
-        grid-row: 3 / 7;
-        grid-column: 3/5;
-        margin-left: 1em;
-        margin-top: 1em;
-    }
-
-    /*
+     /*
 .center{
 	text-align:  center;
 	justify-content: center;
@@ -304,88 +709,382 @@
 }
 */
 
-    .mapMatches {
-        grid-column: 4/5;
-        grid-row: 3/8;
-        height: 16em;
-        margin-top: 1em;
-    }
+     .mapMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 14em;
+         margin-top: 1em;
+     }
 
-    .mapLocation {
-        grid-column: 4/5;
-        grid-row: 3/8;
-        height: 14em;
-        margin-right: 1em;
-    }
-
-
-    .back {
-        margin-bottom: 1em;
-        align-content: center;
-    }
-
-    .hyperlink {
-        text-decoration: underline;
-        padding-top: 1em;
-    }
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 13em;
+         margin-right: 1em;
+     }
 
 
-    .menu {
-        grid-column: 4/4;
-        grid-row: 2/3;
-        display: flex;
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
 
-        justify-content: space-around;
-        /*    height: 50px;*/
-    }
+     .hyperlink {
+         text-decoration: underline;
+         padding-top: 1em;
+     }
 
-    .logoMenu {
-        width: 50px;
-    }
 
-    .chatRoom {
-        height: 14em;
-        border: black 1px solid;
-        margin-right: 1em;
-    }
+     .menu {
+         grid-column: 4/4;
+         grid-row: 2/3;
+         display: flex;
 
-    .SendMessage {
-        margin-top: 0.5em;
-        margin-right: 1em;
-        display: flex;
+         justify-content: space-around;
+         /*    height: 50px;*/
+     }
 
-    }
 
-    .newMessage {
-        height: 2.5em;
-        display: flex;
-        border: black 1px solid;
-        flex-grow: 1;
-        margin-right:1em;
-    }
+     .chatRoom {
+         height: 14em;
+         border: black 1px solid;
+         margin-right: 1em;
+         overflow: scroll;
+     }
 
-    .buttonSendChat {
-        background: grey;
-/*        margin-left: 2em;*/
-    }
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
 
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+
+    
 }
 
-::-webkit-scrollbar {
-    width: 3px;
+/* ----------736*414 --IPHONE 6/7/8 PLUS-----------------*/
+/*media portait */
+@media (min-height: 736px) and (min-width: 414px){
+    
+     .body {
+         height: 736px;
+         width: 414px;
+         /*        padding-top: 1em;*/
+     }
+
+     .structure {
+         display: grid;
+         grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-rows: 2% 10% 10% 10% 10% 58%;
+         height: 100vh;
+     }
+
+
+     .logoTeam {
+         grid-column: 2 / 4;
+         grid-row: 2/3;
+     }
+
+     .login {
+         grid-column: 6 / 8;
+         grid-row: 2/3;
+         height: 50px;
+     }
+
+     .logoLeague {
+         grid-row: 2/3;
+         grid-column: 4/6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 4;
+         grid-column: 2/8;
+         width: 100%;
+         text-align: center;
+         height: 4em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         border: black 1px solid;
+         font-size: 16px;
+     }
+
+     .mapMatches {
+         grid-column: 2/8;
+         grid-row: 4/8;
+         height: 24em;
+         margin-top: 1em;
+     }
+
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 4/8;
+         height: 32em;
+         margin-right: 1em;
+     }
+
+     .week {
+         grid-column: 4/6;
+         margin-top: 1em;
+         grid-row: 5/8;
+         text-align: center;
+         height: 4em;
+         overflow: scroll;
+         font-size: 16px;
+     }
+
+     .containMatches {
+         grid-row: 6/8;
+         grid-column: 2/8;
+         padding: 1em;
+     }
+
+
+     .button {
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-column: 2 / 8;
+         grid-row: 4/8;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
+
+     .map {
+         height: 20em;
+         margin-top: 1em;
+     }
+
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
+
+     .menu {
+         grid-column: 2/8;
+         grid-row: 3;
+         display: flex;
+         /*    display:inline;*/
+         justify-content: space-around;
+     }
+
+     .chatRoom {
+         height: 32em;
+         border: black 1px solid;
+         margin-right: 1em;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+    
+}
+/*media landscape */
+@media (min-width: 736px) and (min-height: 414px){
+     .body {
+         width: 736px;
+         height: 414px;
+     }
+
+     .structure {
+         display: grid;
+         grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-columns: 5% 20% 20% 55%;
+         height: 100vh;
+     }
+
+     .logoTeam {
+         grid-row: 2 / 4;
+         grid-column: 2/3;
+
+     }
+
+     .logoLeague {
+         grid-column: 2/3;
+         grid-row: 4/5;
+         height: 50px;
+     }
+
+     .login {
+         grid-column: 2/3;
+         grid-row: 5 / 6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 6/8;
+         grid-column: 2/3;
+         width: 100%;
+         text-align: center;
+         height: 6em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         /*        border: black 1px solid;*/
+         font-size: 16px;
+         /*	border-radius: 20%;*/
+     }
+
+     .week {
+         margin-left: 1em;
+         grid-row: 4/8;
+         grid-column: 3/4;
+         width: 80%;
+         text-align: center;
+         height: 8em;
+         /* margin-bottom: 1em; */
+         overflow: scroll;
+         /* border: black 1px solid; */
+         font-size: 16px;
+     }
+
+     .containMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         padding: 1em;
+     }
+
+
+     .space {
+         margin-bottom: 1em;
+         margin-top: 1em;
+         /*	padding-top:2em;*/
+     }
+
+     .button {
+         /*	margin:1em;*/
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-row: 3 / 7;
+         grid-column: 3/5;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
+
+     /*
+.center{
+	text-align:  center;
+	justify-content: center;
+	display: flex;
+	display:block;
+}
+*/
+
+     .mapMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 18em;
+         margin-top: 1em;
+     }
+
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height: 16em;
+         margin-right: 1em;
+     }
+
+
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
+
+     .hyperlink {
+         text-decoration: underline;
+         padding-top: 1em;
+     }
+
+
+     .menu {
+         grid-column: 4/4;
+         grid-row: 2/3;
+         display: flex;
+
+         justify-content: space-around;
+         /*    height: 50px;*/
+     }
+
+
+     .chatRoom {
+         height: 14em;
+         border: black 1px solid;
+         margin-right: 1em;
+         overflow: scroll;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+    
 }
 
-::-webkit-scrollbar-thumb {
-    background: red;
-}
 
-    .tittleLocation {
-        font-size: 16px;
-        text-align: center;
-        font-weight: bold;
-    }
 
-    .directionLocation {
-        text-align: center;
-        font-size: 14px;
-    }
+/*PDTES*/
+
+/* ----------568*320----------------*/
+/*media portait */
+/*@media (min-height: 568px) and (min-width: 320px){}
+/*media landscape */
+/*@media (min-width: 568px) and (min-height:320px){}
+
+
+/* ----------736*414----------------*/
+/*media portait */
+/*@media (min-height: 736px) and (min-width: 414px){}
+/*media landscape */
+/*@media (min-width:  736px) and (min-height: 414px){}
+
+

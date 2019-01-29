@@ -42,21 +42,17 @@
                 </div>
             </div>
             <!--logo liga con hipervinculo al inicio-->
-            <div v-on:click="selectedWindow" data-option="menu" class="logoLeague">
-                <img class="logo" src="images/fefa.png"></div>
+            <div v-on:click="selectedWindow" data-option="menu"  class="logoLeague">
+                <img data-option="menu" class="logo" src="images/fefa.png"></div>
             <!--log ing/log out-->
-            <div class="login">
-                <img class="logo" src="images/login.png">
-
-            </div>
-
-            <!-- cambiar opciones por iconos-->
-            <div class="menu">
+            <div class="login" v-show="!conected"><img @click="login" class="logo" src="images/login.png"></div>
+            <div class="login" v-show="conected"><img @click="logout" class="logo" src="images/helmet&ball.png"></div>
+         
+            <div v-show="menu" class="menu">
                 <p> <img class="logoMenu" v-on:click="selectedWindow" data-option="matches" id="election" src="images/Football_Ball.png"></p>
                 <p><img class="logoMenu" v-on:click="selectedWindow" data-option="LocationList" id="locationsList" src="images/localizacion.png"></p>
                 <p><img class="logoMenu" v-on:click="selectedWindow" data-option="chat" src="images/chat.png"></p>
             </div>
-
 
             <!--v-show=teamRullete se muestra en menu, y matches te permite escoger equipo-->
             <div v-show="teamMenu" class="options ">
@@ -65,13 +61,18 @@
                         {{team.name}}</p>
                 </div>
             </div>
-
-            <!-- PAGINA PRINCIPAL //v-show="menu" menu -->
+            
+             <div class="menu">
+                <p> <img class="logoMenu" v-on:click="selectedWindow" data-option="matches" id="election" src="images/Football_Ball.png"></p>
+                <p><img class="logoMenu" v-on:click="selectedWindow" data-option="LocationList" id="locationsList" src="images/localizacion.png"></p>
+                <p><img class="logoMenu" v-on:click="selectedWindow" data-option="chat" src="images/chat.png"></p>
+            </div>
 
             <!-- CAMBIO DE BLOQUE-->
             <!--PAGINA DE MATCHES  PDTE METER DÍA DE JUEGO-->
             <div v-show="matchesV" class=" week">
                 <div>
+                    
                     <div @click="selectedWeek">
                         <p :data-selectWeek="date.week" v-for="date in matches"> Semana {{date.week}}</p>
                     </div>
@@ -80,7 +81,7 @@
             <div v-show="matchesV" class="containMatches">
                 <!-- no eliges nada-->
                 <div v-if="nameTeamActive==null && weekSelected==''">
-                    <div> Escoge una semana y/o un equipo</div>
+                    <div class="directionLocation"> Escoge una semana y/o un equipo</div>
                 </div>
 
                 <!-- eliges 1 equipo pero no semana-->
@@ -89,11 +90,9 @@
                         <!--                    <div v-for="date in matches ">-->
                         <div v-for="team in teams">
                             <p v-if="team.id==nameTeamActive">
-                                <span> Selecciona una semana para ver el partido de la jornada de los {{team.name}} </span>
+                                <span class="directionLocation"> Selecciona una semana para ver el partido de la jornada de los {{team.name}} </span>
                             </p>
                         </div>
-                        <!--                    </div>-->
-
                     </div>
                 </div>
 
@@ -102,7 +101,7 @@
                     <div v-for="team in teams">
                         <div v-for="match in matches">
                             <div v-if="weekSelected=='Semana '+match.week">
-                                <div v-for='inf in match.info' v-if="inf.teamLocal==team.id">
+                                <div v-for='inf in match.info' v-if="inf.teamLocal==team.id" class="directionLocation">
                                     <div :data-selectTeam="team.id" class="space" @click="selectTeam"> {{team.name}} vs
                                         <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span :data-selectTeam="team.id" @click="selectTeam">{{team.name}} </span></div>
                                     </div>
@@ -113,7 +112,6 @@
                 </div>
 
                 <!-- eliges 1 equipo y una semana OK!!-->
-
                 <div v-if="nameTeamActive!=null && weekSelected!=''">
                     <div v-for="team in teams">
                         <div v-for="match in matches">
@@ -121,16 +119,14 @@
                                 <div v-for='inf in match.info' v-if="inf.teamLocal==nameTeamActive && team.id==nameTeamActive">
                                     <!-- <div> {{team.name}} vs-->
                                     <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis como locales contra los </span>{{team.name}} <span>el {{inf.dateText}} a las {{inf.hour}}</span></div>
-                                    <div class="mapMatches"> <iframe :src=team.urlMap frameborder="0" style="border:0" allowfullscreen></iframe>
-                                    </div>
+                                    <div class="mapMatches"> <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
                                 </div>
 
                                 <div v-for='inf in match.info' v-if="inf.teamVisit==nameTeamActive && team.id==inf.teamLocal">
                                     <span>Jugáis como visitantes contra los </span>{{team.name}} <span>el {{inf.dateText}} a las {{inf.hour}}</span>
                                     <!--                                    <div v-for="team in teams" v-if="inf.teamVisit==team.id"> <span>Jugáis contra los </span>{{team.name}} <span>el  a las {{inf.hour}}</span> </div>-->
                                     <!--                                </div>-->
-                                    <div class="mapMatches">
-                                        <iframe :src=team.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+                                    <div class="mapMatches"> <iframe :src=team.urlMap width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
                                 </div>
                             </div>
                         </div>
@@ -150,54 +146,49 @@
             <div v-show="locationsList" v-if="locationMap" id="locationMap" class="info">
                 <p class="tittleLocation">{{teamStadium.name}}</p>
                 <p class="space directionLocation"> {{teamStadium.adress}}</p>
-                <p class="mapLocation"><iframe :src=teamStadium.urlMap width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
-                <!--
-                <div class="back">
-                    <input type="button" value="Volver">
-                </div>
--->
-
+                <p class="mapLocation"><iframe :src=teamStadium.urlMap width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe></p>
             </div>
+
             <!-- CAMBIO DE BLOQUE-->
             <!-- PAGINA CHAT-->
-
             <div v-show="chat" class="info">
-
                 <p> Sala principal </p>
-                <div class="chatRoom" id="conversation"></div>
-                <div >
+                <div class="chatRoom">
+                    <div v-show="conected" class="tittleLocation textChat" id="conversation"> {{sendMessage}} </div> 
+                    <div v-show="!conected" class="tittleLocation textChat">{{needConexion}} </div>    
+                </div>
+                <div>
                     <form class="SendMessage">
-                    <ipunt id="message" type="text" name="sendChat" class="newMessage"> </ipunt>
-                    <button @click="conversation" class="buttonChat"> Enviar</button>
+                        <input id="message" type="text" name="sendChat" class="newMessage">
+                        <button @click.prevent="printChat" class="buttonChat"> Enviar</button>
                     </form>
                 </div>
             </div>
+            <!--
             <div v-show="">
                 <p>Sala privada</p>
                 <div id="conversationPrivate"></div>
                 <div id="messagePrivate"> text </div>
             </div>
-        </div>
-
-
-        <!--        </div>-->
+-->
     </div>
-    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
-            authDomain: "app-fefa.firebaseapp.com",
-            databaseURL: "https://app-fefa.firebaseio.com",
-            projectId: "app-fefa",
-            storageBucket: "app-fefa.appspot.com",
-            messagingSenderId: "837454779753"
-        };
-        firebase.initializeApp(config);
-
-    </script>
-    <script src="js/app.js"></script>
     </div>
-</body>
+    </body>
+            <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+            <script>
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyBEPJs1nFLk3HlveTw0dCYUxx050biEETg",
+                    authDomain: "app-fefa.firebaseapp.com",
+                    databaseURL: "https://app-fefa.firebaseio.com",
+                    projectId: "app-fefa",
+                    storageBucket: "app-fefa.appspot.com",
+                    messagingSenderId: "837454779753"
+                };
+                firebase.initializeApp(config);
+            </script>
+            <script src="js/app.js"></script>
+    
+
 
 </html>

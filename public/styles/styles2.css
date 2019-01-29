@@ -1,122 +1,288 @@
-/*mediaquerys landscape375*667*/
+/* ESTANDARES */
+.logoMenu {
+     width: 50px;
+ }
 
-@media (min-width: 667px) and (min-height: 375px) {
+ .logo {
+     display: flex;
+     margin: 0 auto;
+     height: 50px;
+ }
 
-.body {
-    width: 667px;
-    height: 375px;
+ .foto_logo {
+     display: flex;
+     margin: 0 auto;
+     height: 100%;
+ }
+
+ .space {
+     margin-bottom: 1em;
+     margin-top: 1em;
+     /*	padding-top:2em;*/
+ }
+
+ ::-webkit-scrollbar {
+     width: 3px;
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background: red;
+ }
+
+ .tittleLocation {
+     font-size: 16px;
+     text-align: center;
+     font-weight: bold;
+ }
+
+ .directionLocation {
+     text-align: center;
+     font-size: 14px;
+ }
+
+ .hyperlink {
+     text-decoration: underline;
+     padding-top: 1em;
+ }
+
+.textChat{
+    margin-top:1em;
+    margin-right:1em;
+    margin-left:1em;
+
 }
 
+/* MEDIAS OK!*/
+ /*media portait 667px por 375px*/
+@media (min-height: 667px) and (min-width: 375px) {
 
-.structure {
-    display: grid;
-    grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
-    grid-template-columns: 5% 20% 20% 55%;
-
-    height: 100vh;
-}
-
-.logoTeam {
-    grid-row: 3 / 4;
-    grid-column: 2/3;
-
-}
-
-.logoLeague {
-    grid-column: 2/3;
-    grid-row: 4/5;
-    height: 50px;
-}
-
-.login {
-    grid-column: 2/3;
-    grid-row: 5 / 6;
-    height: 50px;
-}
-
-
-.logo {
-    display: flex;
-    margin: 0 auto;
-    height: 50px;
-    width: 94.48px;
-}
-
+     .body {
+           height: 100vh;
 /*
-.margin{
-	height:1em;
-}
+         height: 667px;
+         width: 375px;
 */
+         /*        padding-top: 1em;*/
+     }
 
-.foto_logo {
-    display: flex;
-    margin: 0 auto;
-    height: 100%;
-}
+     .structure {
+         display: grid;
+         grid-template-columns: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-rows: 2% 10% 10% 10% 10% 58%;
+         height: 100vh;
+     }
 
 
-.options {
-    grid-row:6/8;
-    grid-column: 2/3;
-    width: 100%;
-    text-align: center;
-    height: 6em;
-    margin-bottom: 1em;
-    overflow: scroll;
-    border: black 1px solid;
-    font-size: 16px;
-    /*	border-radius: 20%;*/
-}
+     .logoTeam {
+         grid-column: 2 / 4;
+         grid-row: 2/3;
+     }
 
-.week {
-    margin-left: 1em;
-    grid-row: 4/8;
-    grid-column: 3/4;
-    width: 80%;
-    text-align: center;
-    height: 8em;
-    /* margin-bottom: 1em; */
-    overflow: scroll;
-    /* border: black 1px solid; */
-    font-size: 16px;
-}
+     .login {
+         grid-column: 6 / 8;
+         grid-row: 2/3;
+         height: 50px;
+     }
 
-.containMatches {
-    grid-column: 4/5;
-    grid-row: 2/8;
-    padding: 1em;
+     .logoLeague {
+         grid-row: 2/3;
+         grid-column: 4/6;
+         height: 50px;
+     }
 
-}
+     .options {
+         grid-row: 4;
+         grid-column: 2/8;
+         width: 100%;
+         text-align: center;
+         height: 4em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         border: black 1px solid;
+         font-size: 16px;
+     }
 
-/*
-.teamMenu{
-	margin-bottom: 2m;
-}
-*/
+     .mapMatches {
+         grid-column: 2/8;
+         grid-row: 4/8;
+         height: 100vh;
+         margin-top: 1em;
+     }
 
-.space {
-    margin-bottom: 1em;
-    margin-top: 1em;
-    /*	padding-top:2em;*/
-}
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 4/8;
+         height:  100vh;
+         margin-right: 1em;
+     }
 
-.button {
-    /*	margin:1em;*/
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    margin: 1em;
-    display: flex;
-}
+     .week {
+         grid-column: 4/6;
+         margin-top: 1em;
+         grid-row: 5/8;
+         text-align: center;
+         height: 4em;
+         overflow: scroll;
+         font-size: 16px;
+     }
 
-.info {
-    grid-row: 2 / 7;
-    grid-column: 3/5;
-    margin-left: 2em;
-    margin-top: 1em;
-}
+     .containMatches {
+         grid-row: 6/8;
+         grid-column: 2/8;
+         padding: 1em;
+     }
 
-/*
+
+     .button {
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-column: 2 / 8;
+         grid-row: 4/8;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
+
+     .map {
+         height: 20em;
+         margin-top: 1em;
+     }
+
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
+
+     .menu {
+         grid-column: 2/8;
+         grid-row: 3;
+         display: flex;
+         /*    display:inline;*/
+         justify-content: space-around;
+     }
+
+     .chatRoom {
+         height: 30em;
+         border: black 1px solid;
+         margin-right: 1em;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+ }
+
+ /*media landscape 375px por 667px*/
+ @media (min-width: 667px) and (min-height: 375px) {
+
+     .body {
+         width: 667px;
+         height: 375px;
+     }
+
+     .structure {
+         display: grid;
+         grid-template-rows: 5% 15% 15% 15% 15% 15% 15% 5%;
+         grid-template-columns: 5% 20% 20% 55%;
+
+         height: 100vh;
+     }
+
+     .logoTeam {
+         grid-row: 2 / 4;
+         grid-column: 2/3;
+
+     }
+
+     .logoLeague {
+         grid-column: 2/3;
+         grid-row: 4/5;
+         height: 50px;
+     }
+
+     .login {
+         grid-column: 2/3;
+         grid-row: 5 / 6;
+         height: 50px;
+     }
+
+     .options {
+         grid-row: 6/8;
+         grid-column: 2/3;
+         width: 100%;
+         text-align: center;
+         height: 6em;
+         margin-bottom: 1em;
+         overflow: scroll;
+         /*        border: black 1px solid;*/
+         font-size: 16px;
+         /*	border-radius: 20%;*/
+     }
+
+
+
+     .week {
+         margin-left: 1em;
+         grid-row: 4/8;
+         grid-column: 3/4;
+         width: 80%;
+         text-align: center;
+         height: 8em;
+         /* margin-bottom: 1em; */
+         overflow: scroll;
+         /* border: black 1px solid; */
+         font-size: 16px;
+     }
+
+     .containMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         padding: 1em;
+     }
+
+
+     .space {
+         margin-bottom: 1em;
+         margin-top: 1em;
+         /*	padding-top:2em;*/
+     }
+
+     .button {
+         /*	margin:1em;*/
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         margin: 1em;
+         display: flex;
+     }
+
+     .info {
+         grid-row: 3 / 7;
+         grid-column: 3/5;
+         margin-left: 1em;
+         margin-top: 1em;
+     }
+
+     /*
 .center{
 	text-align:  center;
 	justify-content: center;
@@ -125,38 +291,67 @@
 }
 */
 
-.mapMatches {
-    grid-column: 4/5;
-    grid-row: 3/8;
-    height: 20em;
-    margin-top: 1em;
-}
+     .mapMatches {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height:  100vh;
+         margin-top: 1em;
+     }
 
-.mapLocation {
-    grid-column: 4/5;
-    grid-row: 3/8;
-    height: 15em;
-    margin-top: 1em;
-    margin-right: 1em;
-}
-
-.back {
-    margin-bottom: 1em;
-    align-content: center;
-}
-
-.hyperlink {
-    text-decoration: underline;
-    padding-top: 1em;
-}
+     .mapLocation {
+         grid-column: 4/5;
+         grid-row: 3/8;
+         height:  100vh;
+         margin-right: 1em;
+     }
 
 
-.menu {
-    grid-column: 4/4;
-    display: flex;
+     .back {
+         margin-bottom: 1em;
+         align-content: center;
+     }
 
-    justify-content: center;
-    height: 50%;
-}
+     .hyperlink {
+         text-decoration: underline;
+         padding-top: 1em;
+     }
 
-}
+
+     .menu {
+         grid-column: 4/4;
+         grid-row: 2/3;
+         display: flex;
+
+         justify-content: space-around;
+         /*    height: 50px;*/
+     }
+
+
+     .chatRoom {
+         height: 14em;
+         border: black 1px solid;
+         margin-right: 1em;
+         overflow: scroll;
+     }
+
+     .SendMessage {
+         margin-top: 0.5em;
+         margin-right: 1em;
+         display: flex;
+
+     }
+
+     .newMessage {
+         height: 2.5em;
+         display: flex;
+         border: black 1px solid;
+         flex-grow: 1;
+         margin-right: 1em;
+     }
+
+     .buttonSendChat {
+         background: grey;
+     }
+
+ }
+
