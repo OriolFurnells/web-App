@@ -12,6 +12,7 @@ var app = new Vue({
         temporalInfo: [],
         moreInfo2: [],
         election: "",
+        window: "",
         nameTeamActive: null,
         teamStadium: {},
         weekSelected: "",
@@ -34,6 +35,7 @@ var app = new Vue({
         teamSelected: false,
         dateSelected: false,
         conected: false,
+        chatWindow: true,
 
 
         //------------------
@@ -45,7 +47,7 @@ var app = new Vue({
         address: [],
         dates: [],
         hours: [],
-
+        chatPrivate: "",
         provider: "",
         message: "",
         userNameChat: "",
@@ -224,19 +226,19 @@ var app = new Vue({
             }
         },
 
-        resetTeam: function () {
-            app.nameTeamActive= null
-
+        reset: function () {
+            app.nameTeamActive = null;
+            app.weekSelected = "";
+            console.log(app.nameTeamActive);
+            console.log(app.weekSelected);
         },
-        resetWeek: function () {
-
-            app.weekSelected= ""
-        },
-
+        
         selectTeam: function () {
             let selectedTeam = event.target;
             app.nameTeamActive = selectedTeam.getAttribute("data-selectTeam");
             console.log(app.nameTeamActive)
+            app.chatPrivate = document.getElementById("conversationPrivate");
+            app.chatPrivate.innerHTML = "";
         },
 
         //funciona, detecta equipo seleccionado y devuelve ID
@@ -265,6 +267,7 @@ var app = new Vue({
             this.message = document.getElementById("message").value;
             console.log(this.message)
         },
+
         //FUNCIONES CHAT
         //función de log in
         login: function () {
@@ -304,8 +307,7 @@ var app = new Vue({
         printChat: function () {
             this.conversation();
             this.getPosts();
-            
-            document.getElementById("message").innerHTML ="";
+            document.getElementById("message").value = " ";
         },
 
         conversation: function () {
@@ -315,17 +317,14 @@ var app = new Vue({
             console.log(this.message)
             this.userNameChat = firebase.auth().currentUser.displayName;
             //            console.log("userNameChat"+this.userNameChat)
-
             return firebase.database().ref("fefaGeneral").push({
                 name: this.userNameChat,
                 body: this.message
-
             });
-
         },
+
         getPosts: function () {
             firebase.database().ref('fefaGeneral').on('value', function (data) {
-
                 var posts = document.getElementById("conversation");
 
                 posts.innerHTML = "";
@@ -337,7 +336,7 @@ var app = new Vue({
                     var lineName = document.createElement("div");
                     text.setAttribute("class", "chatcontainer")
                     var element = messages[key];
-                    console.log(element);
+                    //                    console.log(element);
 
                     lineName.append(element.name);
                     lineName.append(":");
@@ -345,13 +344,187 @@ var app = new Vue({
                     text.append(element.body);
                     posts.append(lineName);
                     posts.append(text);
+                    var element = document.getElementById("conversation");
+                    element.scrollIntoView(false);
                 }
-
             })
 
-            console.log("getting posts");
+        },
+
+        printChatPrivate: function () {
+            this.chatTeams();
+            this.PostsTeams();
+            document.getElementById("message").value = " ";
+        },
+
+
+
+        chatTeams: function () {
+            if (app.nameTeamActive == "1") {
+                this.message = document.getElementById("messagePrivate").value;
+                console.log(this.message)
+                this.userNameChat = firebase.auth().currentUser.displayName;
+                return firebase.database().ref("Dracs").push({
+                    name: this.userNameChat,
+                    body: this.message
+                });
+
+
+            } else if (app.nameTeamActive == "2") {
+                this.message = document.getElementById("messagePrivate").value;
+                console.log(this.message)
+                this.userNameChat = firebase.auth().currentUser.displayName;
+                return firebase.database().ref("Voltors").push({
+                    name: this.userNameChat,
+                    body: this.message
+                });
+            } else if (app.nameTeamActive == "3") {
+                this.message = document.getElementById("messagePrivate").value;
+                console.log(this.message)
+                this.userNameChat = firebase.auth().currentUser.displayName;
+                return firebase.database().ref("Firebats").push({
+                    name: this.userNameChat,
+                    body: this.message
+                });
+            } else if (app.nameTeamActive == "4") {
+                this.message = document.getElementById("messagePrivate").value;
+                console.log(this.message)
+                this.userNameChat = firebase.auth().currentUser.displayName;
+                return firebase.database().ref("Hurricanes").push({
+                    name: this.userNameChat,
+                    body: this.message
+                });
+            }
+
+        },
+        PostsTeams: function (team) {
+            console.log("hola POSTsTeams");
+
+            if (app.nameTeamActive == "1") {
+
+                firebase.database().ref('Dracs').on('value', function (data) {
+
+                    app.chatPrivate = document.getElementById("conversationPrivate");
+                    app.chatPrivate.innerHTML = "";
+                    var messages = data.val();
+                    for (var key in messages) {
+                        var text = document.createElement("div");
+                        var lineName = document.createElement("div");
+                        text.setAttribute("class", "chatTeam")
+                        var element = messages[key];
+                        console.log(element);
+
+                        lineName.append(element.name);
+                        lineName.append(":");
+
+                        text.append(element.body);
+                        app.chatPrivate.append(lineName);
+                        app.chatPrivate.append(text);
+                        var element = document.getElementById("conversationPrivate");
+                        element.scrollIntoView(false);
+
+                    }
+                })
+
+            } else if (app.nameTeamActive == "2") {
+              
+                firebase.database().ref('Voltors').on('value', function (data) {
+
+                    app.chatPrivate = document.getElementById("conversationPrivate");
+                    app.chatPrivate.innerHTML = "";
+                    var messages = data.val();
+                    for (var key in messages) {
+                        var text = document.createElement("div");
+                        var lineName = document.createElement("div");
+                        text.setAttribute("class", "chatTeam")
+                        var element = messages[key];
+                        console.log(element);
+
+                        lineName.append(element.name);
+                        lineName.append(":");
+
+                        text.append(element.body);
+                        app.chatPrivate.append(lineName);
+                        app.chatPrivate.append(text);
+                        var element = document.getElementById("conversationPrivate");
+                        element.scrollIntoView(false);
+
+                    }
+                })
+            } else if (app.nameTeamActive == "3") {
+
+                firebase.database().ref('Firebats').on('value', function (data) {
+
+                    app.chatPrivate = document.getElementById("conversationPrivate");
+                    app.chatPrivate.innerHTML = "";
+                    var messages = data.val();
+                    for (var key in messages) {
+                        var text = document.createElement("div");
+                        var lineName = document.createElement("div");
+                        text.setAttribute("class", "chatTeam")
+                        var element = messages[key];
+                        console.log(element);
+
+                        lineName.append(element.name);
+                        lineName.append(":");
+
+                        text.append(element.body);
+                        app.chatPrivate.append(lineName);
+                        app.chatPrivate.append(text);
+                        var element = document.getElementById("conversationPrivate");
+                        element.scrollIntoView(false);
+
+                    }
+                })
+            } else if (app.nameTeamActive == "4") {
+              
+                firebase.database().ref('Hurricanes').on('value', function (data) {
+                    conversationPrivate
+                    app.chatPrivate = document.getElementById("conversationPrivate");
+                    app.chatPrivate.innerHTML = "";
+                    var messages = data.val();
+                    for (var key in messages) {
+                        var text = document.createElement("div");
+                        var lineName = document.createElement("div");
+                        text.setAttribute("class", "chatTeam")
+                        var element = messages[key];
+                        console.log(element);
+
+                        lineName.append(element.name);
+                        lineName.append(":");
+
+                        text.append(element.body);
+                        app.chatPrivate.append(lineName);
+                        app.chatPrivate.append(text);
+                        var element = document.getElementById("conversationPrivate");
+                        element.scrollIntoView(false);
+
+                    }
+                        console.log("hola hurricanes private")
+                })
+            }
+
+
+            //            console.log("getting posts");
+        },
+
+        selectedChat: function () {
+            let selectedEvent = event.target;
+            app.window = selectedEvent.getAttribute("data-chat");
+            console.log(app.window)
+
+            if (app.window == "General") {
+                app.chatWindow = true;
+                console.log("hola General")
+            }
+            if (app.window == "Team") {
+                app.chatWindow = false;
+                console.log("hola team")
+                console.log(app.chatWindow)
+            }
+
 
         }
+    }
 
-    },
 });
