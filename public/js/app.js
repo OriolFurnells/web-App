@@ -51,6 +51,7 @@ var app = new Vue({
         provider: "",
         message: "",
         userNameChat: "",
+        logOk: "",
         favorite: false,
 
         //        dayNumber: 0,
@@ -79,20 +80,17 @@ var app = new Vue({
                 }
             }).then(function (json) {
                 app.info = json;
-                //				console.log(app.info);
                 app.matches = app.info.matches;
                 app.teams = app.info.teams;
-
                 app.extractInfo();
-                //                        app.changeDate();
 
 
             }).catch(function (error) {
                 console.log("Request failed:" + error.message);
             })
         },
+        //función para convertir fecha numerica en texto, suprime 0 si van delatne OK--
         /*
-                //función para convertir fecha numerica en texto, suprime 0 si van delatne OK--
                 //                changeDate: function () {
                 //
                 //                    //            console.log(app.dates)
@@ -141,6 +139,7 @@ var app = new Vue({
                 //
                 //                },
                 */
+        //¿?¿?¿? fncion por parametros pero no recuerdo para que
         option: function (array, teamSelected, change) {
             for (let i = 0; i < array.length; i++)
                 if (Selected == array[i]) {
@@ -148,7 +147,7 @@ var app = new Vue({
                 }
         },
 
-        //obtengo información
+        //función para extraer información
         extractInfo: function () {
             //funciona OK -extraigo el nombre  del estadio y la dirección para el listado 
             for (let i = 0; i < app.teams.length; i++) {
@@ -187,14 +186,18 @@ var app = new Vue({
         //funciona OK, marca el equipo PDTE fecha activos
         selectedWeek: function () {
             app.weekSelected = document.getElementById("date").value;
+            console.log(event.target)
         },
 
         //funciona OK coge el valor del data attribute de options y  cambia el valor de los booleanos de v-show
         selectedWindow: function () {
             let selectedEvent = event.target;
+            console.log(selectedEvent)
             app.election = selectedEvent.getAttribute("data-option");
-            console.log(app.election)
+            console.log(app.election);
+//            console.log(this.$refs.el)
 
+            
             if (app.election == "menu") {
                 app.menu = true;
                 app.teamMenu = true;
@@ -202,7 +205,7 @@ var app = new Vue({
                 app.locationsList = false;
                 app.chat = false;
                 app.locationMap = false;
-
+                
             } else if (app.election == "matches") {
                 app.matchesV = true;
                 app.teamMenu = true;
@@ -232,7 +235,7 @@ var app = new Vue({
             console.log(app.nameTeamActive);
             console.log(app.weekSelected);
         },
-        
+
         selectTeam: function () {
             let selectedTeam = event.target;
             app.nameTeamActive = selectedTeam.getAttribute("data-selectTeam");
@@ -247,7 +250,7 @@ var app = new Vue({
             app.teamLocation = selected.getAttribute("data-stadium");
             console.log(app.teamLocation);
             app.locationMap = true;
-            console.log("hola")
+         
             app.teamStadium = [];
             for (let i = 0; i < app.teams.length; i++)
                 if (app.teamLocation == app.teams[i].id) {
@@ -257,23 +260,20 @@ var app = new Vue({
 
         },
         selectedWeek: function () {
+
             let selectedTeam = event.target;
             app.weekSelected = "Semana " + selectedTeam.getAttribute("data-selectWeek");
+//            selectedTeam.getAttribute("data-selectWeek").classList.remove("active");
+//            event.target.setAttribute("class", "active");
             console.log(app.weekSelected)
         },
-        /////////-------------------
 
-        prueba: function () {
-            this.message = document.getElementById("message").value;
-            console.log(this.message)
-        },
-
+        
         //FUNCIONES CHAT
         //función de log in
         login: function () {
             //documentación
             // https://firebase.google.com/docs/auth/web/google-signin
-
             // Provider
             this.provider = new firebase.auth.GoogleAuthProvider();
             //            this.provider = new firebase.auth.FacebookAuthProvider();
@@ -283,9 +283,8 @@ var app = new Vue({
                 .then(function () {
                     //       console.log(firebase.auth());
                     app.conected = true;
-                    console.log("conectado")
-                    //                console.log(this.userNameChat);
-                    console.log(app.conected);
+                    app.logOk = firebase.auth().currentUser.displayName;
+                    console.log(app.logOk);
 
                 })
                 .catch(function () {
@@ -309,13 +308,12 @@ var app = new Vue({
             this.getPosts();
             document.getElementById("message").value = " ";
         },
-
         conversation: function () {
             // https://firebase.google.com/docs/database/web/read-and-write
             // Values
             this.message = document.getElementById("message").value;
             console.log(this.message)
-            this.userNameChat = firebase.auth().currentUser.displayName;
+            app.userNameChat = firebase.auth().currentUser.displayName;
             //            console.log("userNameChat"+this.userNameChat)
             return firebase.database().ref("fefaGeneral").push({
                 name: this.userNameChat,
@@ -332,18 +330,29 @@ var app = new Vue({
                 var messages = data.val();
 
                 for (var key in messages) {
-                    var text = document.createElement("div");
-                    var lineName = document.createElement("div");
-                    text.setAttribute("class", "chatcontainer")
+                    var line = document.createElement("div");
+                    var text = document.createElement("p");
+                    var people = document.createElement("p");
                     var element = messages[key];
-                    //                    console.log(element);
+                    if (element.name == app.logOk) {
 
-                    lineName.append(element.name);
-                    lineName.append(":");
+                        text.setAttribute("class", "chatMeBackground ");
+                        people.setAttribute("class", "chatMe");
+//                        line.setAttribute("class", "chat");
+                    } else {
+                        text.setAttribute("class", "chatYouBackground");
+                        people.setAttribute("class", "chatYou");
+//                        line.setAttribute("class", "chat");
+                    }
+
+                    people.append(element.name);
+                    people.append(":");
 
                     text.append(element.body);
-                    posts.append(lineName);
-                    posts.append(text);
+                    line.append(people);
+                    line.append(text);
+                    posts.append(line);
+
                     var element = document.getElementById("conversation");
                     element.scrollIntoView(false);
                 }
@@ -354,21 +363,17 @@ var app = new Vue({
         printChatPrivate: function () {
             this.chatTeams();
             this.PostsTeams();
-            document.getElementById("message").value = " ";
+            document.getElementById("messagePrivate").value = " ";
         },
-
-
-
         chatTeams: function () {
             if (app.nameTeamActive == "1") {
                 this.message = document.getElementById("messagePrivate").value;
                 console.log(this.message)
-                this.userNameChat = firebase.auth().currentUser.displayName;
+                app.userNameChat = firebase.auth().currentUser.displayName;
                 return firebase.database().ref("Dracs").push({
                     name: this.userNameChat,
                     body: this.message
                 });
-
 
             } else if (app.nameTeamActive == "2") {
                 this.message = document.getElementById("messagePrivate").value;
@@ -397,8 +402,8 @@ var app = new Vue({
             }
 
         },
+        
         PostsTeams: function (team) {
-            console.log("hola POSTsTeams");
 
             if (app.nameTeamActive == "1") {
 
@@ -407,19 +412,32 @@ var app = new Vue({
                     app.chatPrivate = document.getElementById("conversationPrivate");
                     app.chatPrivate.innerHTML = "";
                     var messages = data.val();
-                    for (var key in messages) {
-                        var text = document.createElement("div");
-                        var lineName = document.createElement("div");
-                        text.setAttribute("class", "chatTeam")
-                        var element = messages[key];
-                        console.log(element);
 
-                        lineName.append(element.name);
-                        lineName.append(":");
+                    for (var key in messages) {
+                        var line = document.createElement("div");
+                        var text = document.createElement("p");
+                        var people = document.createElement("p");
+                        var element = messages[key];
+
+                        if (element.name == app.logOk) {
+
+                            text.setAttribute("class", "chatMeBackground ");
+                            people.setAttribute("class", "chatMe");
+                        } else {
+                            text.setAttribute("class", "chatYouBackground");
+                            people.setAttribute("class", "chatYou");
+                        }
+
+
+                        people.append(element.name);
+                        people.append(":");
 
                         text.append(element.body);
-                        app.chatPrivate.append(lineName);
-                        app.chatPrivate.append(text);
+                        line.append(people);
+                        line.append(text);
+                        app.chatPrivate.append(line);
+
+
                         var element = document.getElementById("conversationPrivate");
                         element.scrollIntoView(false);
 
@@ -427,25 +445,37 @@ var app = new Vue({
                 })
 
             } else if (app.nameTeamActive == "2") {
-              
+
                 firebase.database().ref('Voltors').on('value', function (data) {
 
                     app.chatPrivate = document.getElementById("conversationPrivate");
                     app.chatPrivate.innerHTML = "";
                     var messages = data.val();
-                    for (var key in messages) {
-                        var text = document.createElement("div");
-                        var lineName = document.createElement("div");
-                        text.setAttribute("class", "chatTeam")
-                        var element = messages[key];
-                        console.log(element);
 
-                        lineName.append(element.name);
-                        lineName.append(":");
+                    for (var key in messages) {
+                        var line = document.createElement("div");
+                        var text = document.createElement("p");
+                        var people = document.createElement("p");
+                        var element = messages[key];
+                        if (element.name == app.logOk) {
+
+                            text.setAttribute("class", "chatMeBackground ");
+                            people.setAttribute("class", "chatMe");
+                        } else {
+                            text.setAttribute("class", "chatYouBackground");
+                            people.setAttribute("class", "chatYou");
+                        }
+
+
+                        people.append(element.name);
+                        people.append(":");
 
                         text.append(element.body);
-                        app.chatPrivate.append(lineName);
-                        app.chatPrivate.append(text);
+                        line.append(people);
+                        line.append(text);
+                        app.chatPrivate.append(line);
+
+
                         var element = document.getElementById("conversationPrivate");
                         element.scrollIntoView(false);
 
@@ -458,49 +488,77 @@ var app = new Vue({
                     app.chatPrivate = document.getElementById("conversationPrivate");
                     app.chatPrivate.innerHTML = "";
                     var messages = data.val();
-                    for (var key in messages) {
-                        var text = document.createElement("div");
-                        var lineName = document.createElement("div");
-                        text.setAttribute("class", "chatTeam")
-                        var element = messages[key];
-                        console.log(element);
 
-                        lineName.append(element.name);
-                        lineName.append(":");
+                    for (var key in messages) {
+                        var line = document.createElement("div");
+                        var text = document.createElement("p");
+                        var people = document.createElement("p");
+                        var element = messages[key];
+                        if (element.name == app.logOk) {
+
+                            text.setAttribute("class", "chatMeBackground ");
+                            people.setAttribute("class", "chatMe");
+                        } else {
+                            text.setAttribute("class", "chatYouBackground");
+                            people.setAttribute("class", "chatYou");
+                        }
+
+
+                        people.append(element.name);
+                        people.append(":");
 
                         text.append(element.body);
-                        app.chatPrivate.append(lineName);
-                        app.chatPrivate.append(text);
+                        line.append(people);
+                        line.append(text);
+                        app.chatPrivate.append(line);
+
+
+
                         var element = document.getElementById("conversationPrivate");
                         element.scrollIntoView(false);
+
 
                     }
                 })
             } else if (app.nameTeamActive == "4") {
-              
+
                 firebase.database().ref('Hurricanes').on('value', function (data) {
-                    conversationPrivate
+
                     app.chatPrivate = document.getElementById("conversationPrivate");
                     app.chatPrivate.innerHTML = "";
                     var messages = data.val();
-                    for (var key in messages) {
-                        var text = document.createElement("div");
-                        var lineName = document.createElement("div");
-                        text.setAttribute("class", "chatTeam")
-                        var element = messages[key];
-                        console.log(element);
 
-                        lineName.append(element.name);
-                        lineName.append(":");
+                    for (var key in messages) {
+                        var line = document.createElement("div");
+                        var text = document.createElement("p");
+                        var people = document.createElement("p");
+                        var element = messages[key];
+                        if (element.name == app.logOk) {
+
+                            text.setAttribute("class", "chatMeBackground ");
+                            people.setAttribute("class", "chatMe");
+                        } else {
+                            text.setAttribute("class", "chatYouBackground");
+                            people.setAttribute("class", "chatYou");
+                        }
+
+
+                        people.append(element.name);
+                        people.append(":");
 
                         text.append(element.body);
-                        app.chatPrivate.append(lineName);
-                        app.chatPrivate.append(text);
+                        line.append(people);
+                        line.append(text);
+                        app.chatPrivate.append(line);
+
+
+
                         var element = document.getElementById("conversationPrivate");
                         element.scrollIntoView(false);
 
+
                     }
-                        console.log("hola hurricanes private")
+
                 })
             }
 
@@ -511,20 +569,73 @@ var app = new Vue({
         selectedChat: function () {
             let selectedEvent = event.target;
             app.window = selectedEvent.getAttribute("data-chat");
-            console.log(app.window)
 
             if (app.window == "General") {
                 app.chatWindow = true;
-                console.log("hola General")
             }
             if (app.window == "Team") {
                 app.chatWindow = false;
-                console.log("hola team")
-                console.log(app.chatWindow)
             }
 
 
+        },
+
+        /*
+        /////////////
+        pushNotificacions: function () {
+            // Retrieve Firebase Messaging object.
+            const messaging = firebase.messaging();
+            // Add the public key generated from the console here.
+            messaging.usePublicVapidKey("BP136mFuiHN74coYKnqz7MmyZAH6JPYTXY0o_ePH6Qxj7oJvG_j3bbOqg8o8aFBjSBgzB9uoVl103OH_TNC4cWM");
+
+            messaging.requestPermission().then(function () {
+                console.log('Notification permission granted.');
+                // TODO(developer): Retrieve an Instance ID token for use with FCM.
+                // ...
+            }).catch(function (err) {
+                console.log('Unable to get permission to notify.', err);
+            });
+
+            // Get Instance ID token. Initially this makes a network call, once retrieved
+            // subsequent calls to getToken will return from cache.
+            messaging.getToken().then(function (currentToken) {
+                if (currentToken) {
+                    sendTokenToServer(currentToken);
+                    updateUIForPushEnabled(currentToken);
+                } else {
+                    // Show permission request.
+                    console.log('No Instance ID token available. Request permission to generate one.');
+                    // Show permission UI.
+                    updateUIForPushPermissionRequired();
+                    setTokenSentToServer(false);
+                }
+            }).catch(function (err) {
+                console.log('An error occurred while retrieving token. ', err);
+                showToken('Error retrieving Instance ID token. ', err);
+                setTokenSentToServer(false);
+            });
+
+            // Callback fired if Instance ID token is updated.
+            messaging.onTokenRefresh(function () {
+                messaging.getToken().then(function (refreshedToken) {
+                    console.log('Token refreshed.');
+                    // Indicate that the new Instance ID token has not yet been sent to the
+                    // app server.
+                    setTokenSentToServer(false);
+                    // Send Instance ID token to app server.
+                    sendTokenToServer(refreshedToken);
+                    // ...
+                }).catch(function (err) {
+                    console.log('Unable to retrieve refreshed token ', err);
+                    showToken('Unable to retrieve refreshed token ', err);
+                });
+            });
+
+
         }
+*/
+
+
     }
 
 });
