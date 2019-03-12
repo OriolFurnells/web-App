@@ -29,12 +29,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
-	<!--    <link rel="manifest" href="/manifest.json">-->
+<!-- <link rel="manifest" href="/manifest.json">-->
 	<title>FEFA</title>
 </head>
 
 <body>
-	<div id="app" class="body">
+	<div id="app" class="body" v-cloak>
 		<!--ORGANIZATION WITH GRIDS-->
 		<div class="structure">
 			<!--HEADER OF DE WEB-APP-->
@@ -83,8 +83,10 @@
 				<div class="textoInicio" v-on:click="selectedWindow" data-option="matches">
 					<img class="logoInicio" v-on:click="selectedWindow" data-option="matches" src="images/Football_Ball.png"> <span v-on:click="selectedWindow" data-option="matches"> Partidos</span>
 				</div>
+				
 				<div class="textoInicio" v-on:click="selectedWindow" data-option="LocationList">
 					<img class="logoInicio" v-on:click="selectedWindow" data-option="LocationList" src="images/localizacion.png"><span v-on:click="selectedWindow" data-option="LocationList">Mapas</span></div>
+				
 				<div class="textoInicio" v-on:click="selectedWindow" data-option="chat">
 					<img class="logoInicio" v-on:click="selectedWindow" data-option="chat" src="images/chat.png"><span v-on:click="selectedWindow" data-option="chat">Chat</span>
 				</div>
@@ -178,7 +180,7 @@
 			<div v-show="chat" class="info">
 				<div class="chatTittle">
 					<p v-on:click="selectedChat" data-chat="General" v-bind:class="{ active:chatWindow  }" class="spaceRight"> Sala principal </p>
-					<!-- If you select a team, this option will be available to chat with other members of the same team-->
+					<!-- If you selehat a team, this option will be available to chat with other members of the same team-->
 					<span v-on:click="selectedChat" class="chatTeam" v-bind:class="{ active: !chatWindow }" data-chat="Team" v-for="team in teams" v-if="idTeamSelected==team.id">
 						Sala de los {{team.name}}
 					</span>
@@ -192,7 +194,7 @@
 					<div>
 						<form class="SendMessage">
 							<input id="message" type="text" name="sendChat" class="newMessage">
-							<button @click.prevent="printChat" class="buttonChat"> Enviar</button>
+							<button @click.prevent="printChat()" class="buttonChat"> Enviar</button>
 						</form>
 					</div>
 				</div>
@@ -206,7 +208,7 @@
 					<div>
 						<form class="SendMessage">
 							<input id="messagePrivate" type="text" name="sendChat" class="newMessage">
-							<button @click.prevent="printChatPrivate" class="buttonChat"> Enviar</button>
+							<button @click.prevent="printChatPrivate(idTeamSelected)" class="buttonChat"> Enviar</button>
 						</form>
 					</div>
 				</div>

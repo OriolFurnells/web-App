@@ -1,4 +1,8 @@
 /* ESTANDARES */
+[v-cloak]{
+	display: none;
+}
+
 .logoMenu {
     width: 50px;
 }
@@ -78,11 +82,13 @@
 }
 
 .logoInicio {
-    width: 100px;
+    width: 88px;
 }
 
 .textoInicio {
     font-size: xx-large;
+	max-height:50px;
+
 }
 
 .chat{
